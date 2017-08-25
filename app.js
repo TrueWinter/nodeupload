@@ -39,7 +39,7 @@ app.post('/upload', function(req, res) {
       }
       res.writeHead(200, {'content-type': 'text/plain'});
       res.write('received upload:\n\n');
-      res.write(util.inspect({fields: fields, files: files}));
+      res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
       res.end('\nFile uploaded: ' + fileName)
       console.log(util.inspect({fields: fields, files: files}));
     });
