@@ -6,11 +6,32 @@ var path = require('path'); // Used to get file directory
 var crypto = require('crypto'); // Used to generate file name
 var os = require('os'); // Used to get OS tmp directory
 var RateLimit = require('express-rate-limit'); // Time to ratelimit...
+var sqlite3 = require('sqlite3');
 
 var config = require('./config');
 var tmpFileDir = os.tmpdir() + '/nodeupload_tmp/';
 var app = express();
 
+
+var db = new sqlite3.Database('./db/database.db', (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to the database.');
+});
+
+var sqlAction = `SELECT name FROM sqlite_master WHERE type='table' AND name='tokens'`;
+db.get(sqlAction, (err, row) => {
+  if (!row) {
+    console.log('There is nothing in the database. Please run createUser.js to create a new user');
+    fs.unlink(path.join(__dirname, 'db/database.db'));
+    process.exit(0);
+  }
+});
+
+
+
+db.close();
 var apiRatelimiter = new RateLimit({
   windowMs: 7500, // 7.5 second window
   max: 5, // start blocking after 5 requests
