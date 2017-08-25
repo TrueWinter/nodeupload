@@ -5,22 +5,37 @@ var fs = require('fs'); // Used to move files
 var path = require('path'); // Used to get file directory
 var crypto = require('crypto'); // Used to generate file name
 var os = require('os'); // Used to get OS tmp directory
+var RateLimit = require('express-rate-limit'); // Time to ratelimit...
 
 var config = require('./config');
+var tmpFileDir = os.tmpdir() + '/nodeupload_tmp/';
 var app = express();
 
-app.post('/upload', function(req, res) {
+var apiRatelimiter = new RateLimit({
+  windowMs: 7500, // 7.5 second window
+  max: 5, // start blocking after 5 requests
+  delayAfter: 0, // disable slow down of requests
+  delayMs: 0,
+  headers: true,
+  handler: function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Retry-After', (7500 / 1000));
+    console.log(req.ip + ' was ratelimited');
+    res.status(429).json({"success": false, "message": "Ratelimited (too many requests)"});
+  }
+});
+
+app.post('/upload', apiRatelimiter, function(req, res) {
     // parse a file upload
     var form = new formidable.IncomingForm();
 
-    form.uploadDir = os.tmpdir() + '/nodeupload_tmp/'; // Saves tmp files in tmp dir
-    // TODO: Daily clean of uploadDir directory with tmp files
+    form.uploadDir = tmpFileDir; // Saves tmp files in tmp dir
     form.parse(req, function(err, fields, files) { // Parses form for upload
       var uploadtoken = config.uploadtoken;
       if (fields.token === uploadtoken || req.headers.token === uploadtoken) { // Checks if token in body or headers is equal to real token
       if (!files.upload) { // Checks if there is a file in request
         console.log(req.ip + ' tried to upload without a file');
-        return res.send('No file included');
+        return res.json({"success": false, "message": "No file in request"});
       }
       var tmpPath = files.upload.path; // Gets location of tmp file
       console.log(tmpPath);
@@ -42,7 +57,7 @@ app.post('/upload', function(req, res) {
         });
       } else {
         console.log(req.ip + ' tried to upload with an incorrect token');
-        return res.send('Token incorrect');
+        return res.json({"success": false, "message": "Invalid token"});
       }
       res.writeHead(200, {'content-type': 'text/plain'});
       res.write('received upload:\n\n');
@@ -59,10 +74,31 @@ app.get('/', function(req, res) {
   res.end(
     '<form action="/upload" enctype="multipart/form-data" method="post">'+
     'Token: <input type="text" name="token"><br>'+
-    '<input type="file" name="upload" multiple="multiple"><br>'+
+    '<input type="file" name="upload"><br>'+
     '<input type="submit" value="Upload">'+
     '</form>'
   );
+});
+
+app.get('/admin/deleteall', apiRatelimiter, function(req, res) {
+  var admintoken = config.admintoken;
+  if (req.headers.admintoken === admintoken) { // Checks if token in body or headers is equal to real token
+    console.log(req.ip + ' requested a file directory clear');
+    var fileDir = path.join(__dirname, 'files/');
+    fs.readdir(fileDir, (err, files) => {
+      if (err) throw error;
+
+      for (const file of files) {
+        fs.unlink(path.join(fileDir, file), err => {
+          if (err) throw error;
+        });
+      }
+    });
+    res.json({"success": true, "message": "Files deleted"});
+  } else {
+    console.log(req.ip + ' requested a file directory clear without valid token');
+    return res.json({"success": false, "message": "Invalid admin token"});
+  }
 });
 
 app.get('*', function(req, res) {
