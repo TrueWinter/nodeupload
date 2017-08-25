@@ -80,7 +80,7 @@ app.get('/', function(req, res) {
   );
 });
 
-app.get('/admin/deleteall', apiRatelimiter, function(req, res) {
+app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you want to delete all files saved in './files' directory
   var admintoken = config.admintoken;
   if (req.headers.admintoken === admintoken) { // Checks if token in body or headers is equal to real token
     console.log(req.ip + ' requested a file directory clear');
@@ -95,6 +95,27 @@ app.get('/admin/deleteall', apiRatelimiter, function(req, res) {
       }
     });
     res.json({"success": true, "message": "Files deleted"});
+  } else {
+    console.log(req.ip + ' requested a file directory clear without valid token');
+    return res.json({"success": false, "message": "Invalid admin token"});
+  }
+});
+
+app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when temp files are too many
+  var admintoken = config.admintoken;
+  if (req.headers.admintoken === admintoken) { // Checks if token in body or headers is equal to real token
+    console.log(req.ip + ' requested a file directory clear');
+
+    fs.readdir(tmpFileDir, (err, files) => {
+      if (err) throw error;
+
+      for (const file of files) {
+        fs.unlink(path.join(tmpFileDir, file), err => {
+          if (err) throw error;
+        });
+      }
+    });
+    res.json({"success": true, "message": "Temporary files deleted"});
   } else {
     console.log(req.ip + ' requested a file directory clear without valid token');
     return res.json({"success": false, "message": "Invalid admin token"});
