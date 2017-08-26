@@ -1,6 +1,6 @@
 {
   "name": "nodeupload",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Simple file uploader in Node.js using tokens as upload authentication",
   "main": "index.js",
   "scripts": {

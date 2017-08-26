@@ -67,10 +67,11 @@ To fix this, delete the `node_modules` directory and run `npm install` again.
 
 - The program 'node' is currently not installed.
 ![NodeNotInstall](https://i.imgur.com/xUHT8FJ.png)
-Follow the instructions [here](https://nodejs.org/en/download/package-manager/)
+
+  Follow the instructions [here](https://nodejs.org/en/download/package-manager/)
 
 - The program 'npm' is currently not installed.
-Same as above.
+  Same as above.
 
 ## Please note:
 **THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0**
