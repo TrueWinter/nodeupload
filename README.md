@@ -43,7 +43,7 @@ You will need to use a program that can send headers with a GET request. I prefe
   - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
   ![DeleteTMP](https://i.imgur.com/XXUjU38.png)
 
-#### Errors and Solutions
+### Errors and Solutions
 You may come across some of these while using this.
 
 - EACCES (Permission denied): Make sure that you have permissions to access files in that directory.
