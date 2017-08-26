@@ -1,6 +1,8 @@
 # Node Upload
 Decided to start from scratch using a different dependency for uploading. Basics are working yet this is **NOT** ready for use in a production environment.
 
+**All screenshots use the tokens from the first GIF under the installing section**
+
 ### Installing
 This project is not quite ready for public use yet, however, if you can use it if you want to.
 
@@ -13,7 +15,7 @@ node app.js
 ![InstructionsGIF](https://i.imgur.com/gMNDSZC.gif)
 
 ### Creating a New User
-After you are done installing and your friend also want to use this, run the following command and answer the questions.
+After you are done installing and your friend also wants to use this, run the following command and answer the questions.
 
 ```sh
 node createUser.js
