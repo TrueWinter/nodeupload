@@ -140,9 +140,7 @@ app.get('/', function(req, res) {
 app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you want to delete all files saved in './files' directory
 
 
-
-
-function startDB() {
+//function startDB() {
   db.serialize(function() {
     console.log(usertoken);
     db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
@@ -172,16 +170,10 @@ function startDB() {
         });
         res.json({"success": true, "message": "Files deleted"});
 
-    });
-
+        });
       });
-    });
-  }
-
-
-
-
-
+    //};
+  });
 
 
 
