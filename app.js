@@ -8,7 +8,7 @@ var os = require('os'); // Used to get OS tmp directory
 var RateLimit = require('express-rate-limit'); // Time to ratelimit...
 var sqlite3 = require('sqlite3');
 
-var config = require('./config');
+//var config = require('./config');
 var tmpFileDir = os.tmpdir() + '/nodeupload_tmp/';
 var app = express();
 
