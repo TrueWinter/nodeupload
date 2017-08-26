@@ -107,6 +107,11 @@ app.post('/upload', apiRatelimiter, function(req, res) {
       } else {
         usertoken = req.headers.token;
       }
+
+      if (files.upload.name === '') {
+        console.log(req.ip + ' uploading nothing');
+        return res.json({"success": false, "message": "No file in request"});
+      }
       startDB();
       var continueUpload = false;
 
@@ -116,7 +121,7 @@ app.post('/upload', apiRatelimiter, function(req, res) {
       function startDB() {
         db.serialize(function() {
           console.log(usertoken);
-          db.all(`SELECT token FROM tokens WHERE token = '${usertoken}'`, function(err, allRows) {
+          db.all(`SELECT token, enabled FROM tokens WHERE token = '${usertoken}'`, function(err, allRows) {
 
             if(err != null){
                return console.log(err);
@@ -124,48 +129,53 @@ app.post('/upload', apiRatelimiter, function(req, res) {
 
             }
 
-            console.log(allRows);
-            if (!allRows[0]) {
-              console.log(req.ip + ' tried to upload with an incorrect token');
-              return res.json({"success": false, "message": "Invalid token"});
-            }
-            continueUpload = true;
-            if (!files.upload) { // Checks if there is a file in request
-              console.log(req.ip + ' tried to upload without a file');
-              return res.json({"success": false, "message": "No file in request"});
-            }
-            var tmpPath = files.upload.path; // Gets location of tmp file
-            console.log(tmpPath);
-             var ext = require('path').extname(files.upload.name); // Gets file extension
-             if (ext === '.exe' || ext === '.html' || ext === '.bat' || ext === '.cmd' || ext === '.sh') {
-               console.log(req.ip + ' tried to upload a file with a blacklisted extension');
-               return res.json({"success": false, "message": "Blacklisted file extension"});
-             }
-             console.log(ext);
-            function randomValueHex (length) { // Generates random string for file name
-                return crypto.randomBytes(Math.ceil(length/2))
-                    .toString('hex') // convert to hexadecimal format
-                    .slice(0,length);   // return required number of characters
-            }
-            var filenameLength = 6;
-            var fileName = randomValueHex(filenameLength) + ext;
-            var newPath = path.join(__dirname, 'files/', fileName);
-            console.log(newPath);
+              console.log(allRows[0].token);
+              console.log(allRows[0].enabled)
+              if (!allRows[0]) {
+                console.log(req.ip + ' tried to upload with an incorrect token');
+                return res.json({"success": false, "message": "Invalid token"});
+              }
+              if (allRows[0].enabled === "1") {
+                continueUpload = true;
+                if (!files.upload) { // Checks if there is a file in request
+                  console.log(req.ip + ' tried to upload without a file');
+                  return res.json({"success": false, "message": "No file in request"});
+                }
+                var tmpPath = files.upload.path; // Gets location of tmp file
+                console.log(tmpPath);
+                 var ext = require('path').extname(files.upload.name); // Gets file extension
+                 if (ext === '.exe' || ext === '.html' || ext === '.bat' || ext === '.cmd' || ext === '.sh') {
+                   console.log(req.ip + ' tried to upload a file with a blacklisted extension');
+                   return res.json({"success": false, "message": "Blacklisted file extension"});
+                 }
+                 console.log(ext);
+                function randomValueHex (length) { // Generates random string for file name
+                    return crypto.randomBytes(Math.ceil(length/2))
+                        .toString('hex') // convert to hexadecimal format
+                        .slice(0,length);   // return required number of characters
+                }
+                var filenameLength = 6;
+                var fileName = randomValueHex(filenameLength) + ext;
+                var newPath = path.join(__dirname, 'files/', fileName);
+                console.log(newPath);
 
-              fs.rename(tmpPath, newPath, function (err) {
-                if (err) throw err;
+                  fs.rename(tmpPath, newPath, function (err) {
+                    if (err) throw err;
 
-              });
+                  });
 
-            res.writeHead(200, {'content-type': 'text/plain'});
-            res.write('received upload:\n\n');
-            res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
-            res.end('\nFile uploaded: ' + fileName)
-            console.log(util.inspect({fields: fields, files: files}));
+                res.writeHead(200, {'content-type': 'text/plain'});
+                res.write('received upload:\n\n');
+                res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
+                res.end('\nFile uploaded: ' + fileName)
+                console.log(util.inspect({fields: fields, files: files}));
 
-            //callback(allRows);
-            //db.close();
-
+                //callback(allRows);
+                //db.close();
+              } else {
+                console.log(req.ip + ' tried to upload with a disabled token');
+                return res.json({"success": false, "message": "Token disabled"});
+              }
             });
           });
         }
