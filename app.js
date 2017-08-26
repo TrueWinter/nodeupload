@@ -24,6 +24,7 @@ var sqlAction = `SELECT name FROM sqlite_master WHERE type='table' AND name='tok
 db.get(sqlAction, (err, row) => {
   if (!row) {
     console.log('There is nothing in the database. Please run createUser.js to create a new user');
+    db.close();
     fs.unlink(path.join(__dirname, 'db/database.db'));
     process.exit(0);
   }
@@ -31,7 +32,6 @@ db.get(sqlAction, (err, row) => {
 
 
 
-db.close();
 var apiRatelimiter = new RateLimit({
   windowMs: 7500, // 7.5 second window
   max: 5, // start blocking after 5 requests
@@ -53,38 +53,74 @@ app.post('/upload', apiRatelimiter, function(req, res) {
     form.uploadDir = tmpFileDir; // Saves tmp files in tmp dir
     form.parse(req, function(err, fields, files) { // Parses form for upload
       var uploadtoken = config.uploadtoken;
-      if (fields.token === uploadtoken || req.headers.token === uploadtoken) { // Checks if token in body or headers is equal to real token
-      if (!files.upload) { // Checks if there is a file in request
-        console.log(req.ip + ' tried to upload without a file');
-        return res.json({"success": false, "message": "No file in request"});
-      }
-      var tmpPath = files.upload.path; // Gets location of tmp file
-      console.log(tmpPath);
-       var ext = require('path').extname(files.upload.name); // Gets file extension
-       console.log(ext);
-      function randomValueHex (length) { // Generates random string for file name
-          return crypto.randomBytes(Math.ceil(length/2))
-              .toString('hex') // convert to hexadecimal format
-              .slice(0,length);   // return required number of characters
-      }
-      var filenameLength = config.filenameLength;
-      var fileName = randomValueHex(filenameLength) + ext;
-      var newPath = path.join(__dirname, 'files/', fileName);
-      console.log(newPath);
+      var usertoken = '';
 
-        fs.rename(tmpPath, newPath, function (err) {
-          if (err) throw err;
-
-        });
+      if (fields.token) {
+          usertoken = fields.token;
       } else {
-        console.log(req.ip + ' tried to upload with an incorrect token');
-        return res.json({"success": false, "message": "Invalid token"});
+        usertoken = req.headers.token;
       }
-      res.writeHead(200, {'content-type': 'text/plain'});
-      res.write('received upload:\n\n');
-      res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
-      res.end('\nFile uploaded: ' + fileName)
-      console.log(util.inspect({fields: fields, files: files}));
+      startDB();
+      var continueUpload = false;
+
+      //var sqlAct = `SELECT token FROM tokens WHERE token = ${usertoken}`;
+      //let sql = `SELECT * FROM tokens`;
+      //let token = usertoken;
+      function startDB() {
+        db.serialize(function() {
+          console.log(usertoken);
+          db.all(`SELECT token FROM tokens WHERE token = '${usertoken}'`, function(err, allRows) {
+
+            if(err != null){
+               return console.log(err);
+              //callback(err);
+
+            }
+
+            console.log(allRows);
+            if (!allRows[0]) {
+              console.log(req.ip + ' tried to upload with an incorrect token');
+              return res.json({"success": false, "message": "Invalid token"});
+            }
+            continueUpload = true;
+            if (!files.upload) { // Checks if there is a file in request
+              console.log(req.ip + ' tried to upload without a file');
+              return res.json({"success": false, "message": "No file in request"});
+            }
+            var tmpPath = files.upload.path; // Gets location of tmp file
+            console.log(tmpPath);
+             var ext = require('path').extname(files.upload.name); // Gets file extension
+             console.log(ext);
+            function randomValueHex (length) { // Generates random string for file name
+                return crypto.randomBytes(Math.ceil(length/2))
+                    .toString('hex') // convert to hexadecimal format
+                    .slice(0,length);   // return required number of characters
+            }
+            var filenameLength = config.filenameLength;
+            var fileName = randomValueHex(filenameLength) + ext;
+            var newPath = path.join(__dirname, 'files/', fileName);
+            console.log(newPath);
+
+              fs.rename(tmpPath, newPath, function (err) {
+                if (err) throw err;
+
+              });
+
+            res.writeHead(200, {'content-type': 'text/plain'});
+            res.write('received upload:\n\n');
+            res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
+            res.end('\nFile uploaded: ' + fileName)
+            console.log(util.inspect({fields: fields, files: files}));
+
+            //callback(allRows);
+            //db.close();
+
+            });
+          });
+        }
+
+      //if (continueUpload) { // Checks if token in body or headers is equal to real token
+
     });
 });
 

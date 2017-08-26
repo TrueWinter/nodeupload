@@ -2,9 +2,6 @@ var uuid = require('uuid');
 var readline = require('readline');
 var sqlite3 = require('sqlite3');
 
-
-
-
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
@@ -34,16 +31,21 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
       admin = answer;
       console.log('Admin: ' + admin);
 
-      if (admin === "true") {
-        admintoken = uuid.v4();
+      if (admin === "true" || admin === "false") {
+
+        if (admin === "true") {
+          admintoken = uuid.v4();
+        }
+      } else {
+        return console.log('Incorrect option');
       }
 
       console.log('Email: ' + email + '\n Token: ' + token + '\n Enabled: ' + enabled + '\n Admin: ' + admin + '\n Admin Token: ' + admintoken);
 
-      //rl.on('close', () => {
-      //  startDB();
-      //})
-    //rl.close();
+      rl.on('close', () => {
+        startDB();
+      })
+    rl.close();
 
     });
   });
