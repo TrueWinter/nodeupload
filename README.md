@@ -25,6 +25,8 @@ Once the server has started, open a web browser to `YOUR_IP:8099` (there will be
 
 If everything worked, it should show an upload form. Just add your token where it says `Token`, choose a file to upload, then click the button. It should upload. If not, check the console for errors. You may need to open an issue here.
 
+![UsageGIF](https://i.imgur.com/bZqbH0t.png)
+
 #### Admin Tools
 
 There are also some admin tools (currently, deleting files and temporary files). These require an admin token which you get from answering `true` to the `Admin` question when running `createUser.js`.
@@ -33,10 +35,11 @@ You will need to use a program that can send headers with a GET request. I prefe
 
  **Delete files in 'files' directory:**
   - Make a GET request to `YOUR_IP:8099/admin/deletefiles` including a header with your admin token with the name `admintoken`.
+  ![DeleteFiles](https://i.imgur.com/aVtL3d7.png)
 
   **Delete files in temporary directory (`OPERATING_SYSTEM_TMP/nodeupload_tmp/`)**
   - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
-
+  ![DeleteTMP](https://i.imgur.com/XXUjU38.png)
 
 ### KNOWN ISSUES
 If you get an error like this after uploading, please manually create a directory called `nodeupload_tmp` in your operating system's tmp directory: ![Error1](https://i.imgur.com/TrdaOsK.png)
