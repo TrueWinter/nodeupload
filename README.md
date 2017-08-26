@@ -46,6 +46,31 @@ You will need to use a program that can send headers with a GET request. I prefe
 ### KNOWN ISSUES
 If you get an error like this after uploading, please manually create a directory called `nodeupload_tmp` in your operating system's tmp directory: ![Error1](https://i.imgur.com/TrdaOsK.png)
 
+#### Other Issues
+You may come across some of these while using this.
+
+- EACCES (Permission denied): Make sure that you have permissions to access files in that directory.
+
+- EADDRINUSE (Address already in use):
+![NodeEADDRINUSE](https://i.imgur.com/gjOM9Vp.png)
+Make sure that there is no application running that is using that port. If you don't know what process is using the port, run the following **(LINUX ONLY)** `netstat -peanut | grep 'PORT_HERE'` then run `kill 'PROCESS_ID'` (The process ID will be in a format like `12345/process`)
+![KillProcess](https://i.imgur.com/zlgFpew.png)
+
+- ENOENT (No such file or directory):
+![NoNodeUploadTMP](https://i.imgur.com/lxe00fe.png)
+You should not find this as NodeUpload should automatically create a new directory if none is found. However, if you do find this issue, make a new directory named `nodeupload_tmp` in your operating system's tmp directory.
+
+- ENOENT after installing dependencies: You may see an error that looks like this after installing the dependencies:
+![SQLiteENOENT](https://i.imgur.com/bhJ7BbG.png)
+To fix this, delete the `node_modules` directory and run `npm install` again.
+
+- The program 'node' is currently not installed.
+![NodeNotInstall](https://i.imgur.com/xUHT8FJ.png)
+Follow the instructions [here](https://nodejs.org/en/download/package-manager/)
+
+- The program 'npm' is currently not installed.
+Same as above.
+
 ### Please note:
 **THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0**
 

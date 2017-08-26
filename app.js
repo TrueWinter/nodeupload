@@ -10,8 +10,26 @@ var sqlite3 = require('sqlite3');
 
 //var config = require('./config');
 var tmpFileDir = os.tmpdir() + '/nodeupload_tmp/';
+fs.access(tmpFileDir, function(err) {
+  if (err) {
+    console.log('NodeUpload temporary directory not found or no permissions to access it. Attempting to create it now.');
+    fs.mkdir(tmpFileDir, function(err) {
+      if (err) {
+        return console.error('Failed to create directory' + err);
+      } //else {
+      //  console.log('Temporary directory exists. Ready to go.')
+      //}
+    });
+  } else {
+    console.log('Temporary directory exists. Ready to go.');
+  }
+});
+
+
+
 var app = express();
 
+app.set('trust proxy', '127.0.0.1');
 
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
