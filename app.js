@@ -109,7 +109,7 @@ app.post('/upload', apiRatelimiter, function(req, res) {
       }
 
       if (files.upload.name === '') {
-        console.log(req.ip + ' uploading nothing');
+        console.log(req.ip + ' tried to upload nothing');
         return res.json({"success": false, "message": "No file in request"});
       }
       startDB();
