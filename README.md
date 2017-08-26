@@ -3,7 +3,7 @@ Decided to start from scratch using a different dependency for uploading. Basics
 
 **All screenshots use the tokens from the first GIF under the installing section**
 
-### Installing
+## Installing
 This project is not quite ready for public use yet, however, if you can use it if you want to.
 
 ```sh
@@ -14,14 +14,14 @@ node app.js
 
 ![InstructionsGIF](https://i.imgur.com/gMNDSZC.gif)
 
-### Creating a New User
+## Creating a New User
 After you are done installing and your friend also wants to use this, run the following command and answer the questions.
 
 ```sh
 node createUser.js
 ```
 
-### Usage
+## Usage
 
 Once the server has started, open a web browser to `YOUR_IP:8099` (there will be an option to configure this at some time).
 
@@ -29,7 +29,7 @@ If everything worked, it should show an upload form. Just add your token where i
 
 ![UsageGIF](https://i.imgur.com/bZqbH0t.png)
 
-#### Admin Tools
+### Admin Tools
 
 There are also some admin tools (currently, deleting files and temporary files). These require an admin token which you get from answering `true` to the `Admin` question when running `createUser.js`.
 
@@ -43,7 +43,7 @@ You will need to use a program that can send headers with a GET request. I prefe
   - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
   ![DeleteTMP](https://i.imgur.com/XXUjU38.png)
 
-### Errors and Solutions
+## Errors and Solutions
 You may come across some of these while using this.
 
 - EACCES (Permission denied): Make sure that you have permissions to access files in that directory.
@@ -72,10 +72,10 @@ Follow the instructions [here](https://nodejs.org/en/download/package-manager/)
 - The program 'npm' is currently not installed.
 Same as above.
 
-### Please note:
+## Please note:
 **THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0**
 
-### LICENSE
+## LICENSE
 MIT License
 
 Copyright (c) 2017 NdT3Development
