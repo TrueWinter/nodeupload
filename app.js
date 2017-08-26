@@ -138,45 +138,88 @@ app.get('/', function(req, res) {
 });
 
 app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you want to delete all files saved in './files' directory
-  var admintoken = config.admintoken;
-  if (req.headers.admintoken === admintoken) { // Checks if token in body or headers is equal to real token
-    console.log(req.ip + ' requested a file directory clear');
-    var fileDir = path.join(__dirname, 'files/');
-    fs.readdir(fileDir, (err, files) => {
-      if (err) throw error;
 
-      for (const file of files) {
-        fs.unlink(path.join(fileDir, file), err => {
-          if (err) throw error;
-        });
+
+
+
+function startDB() {
+  db.serialize(function() {
+    console.log(usertoken);
+    db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
+
+      if(err != null){
+         return console.log(err);
+        //callback(err);
+
       }
+
+      console.log(adminTokens);
+      if (!adminTokens[0]) {
+        console.log(req.ip + ' tried to upload with an incorrect token');
+        return res.json({"success": false, "message": "Invalid token"});
+      }
+      //var admintoken = config.admintoken;
+        console.log(req.ip + ' requested a file directory clear');
+        var fileDir = path.join(__dirname, 'files/');
+        fs.readdir(fileDir, (err, files) => {
+          if (err) throw error;
+
+          for (const file of files) {
+            fs.unlink(path.join(fileDir, file), err => {
+              if (err) throw error;
+            });
+          }
+        });
+        res.json({"success": true, "message": "Files deleted"});
+
     });
-    res.json({"success": true, "message": "Files deleted"});
-  } else {
-    console.log(req.ip + ' requested a file directory clear without valid token');
-    return res.json({"success": false, "message": "Invalid admin token"});
+
+      });
+    });
   }
-});
+
+
+
+
+
+
+
 
 app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when temp files are too many
-  var admintoken = config.admintoken;
-  if (req.headers.admintoken === admintoken) { // Checks if token in body or headers is equal to real token
-    console.log(req.ip + ' requested a file directory clear');
 
-    fs.readdir(tmpFileDir, (err, files) => {
-      if (err) throw error;
 
-      for (const file of files) {
-        fs.unlink(path.join(tmpFileDir, file), err => {
+  function startDB() {
+    db.serialize(function() {
+      console.log(usertoken);
+      db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
+
+        if(err != null){
+           return console.log(err);
+          //callback(err);
+
+        }
+
+        console.log(adminTokens);
+        if (!adminTokens[0]) {
+          console.log(req.ip + ' tried to upload with an incorrect token');
+          return res.json({"success": false, "message": "Invalid token"});
+        }
+        console.log(req.ip + ' requested a file directory clear');
+
+        fs.readdir(tmpFileDir, (err, files) => {
           if (err) throw error;
+
+          for (const file of files) {
+            fs.unlink(path.join(tmpFileDir, file), err => {
+              if (err) throw error;
+            });
+          }
         });
-      }
-    });
-    res.json({"success": true, "message": "Temporary files deleted"});
-  } else {
-    console.log(req.ip + ' requested a file directory clear without valid token');
-    return res.json({"success": false, "message": "Invalid admin token"});
-  }
+        res.json({"success": true, "message": "Temporary files deleted"});
+
+        });
+      });
+    }
 });
 
 app.get('*', function(req, res) {

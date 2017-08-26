@@ -1,14 +1,24 @@
 {
-  "name": "FileUpload",
-  "version": "1.0.0",
-  "description": "",
+  "name": "nodeupload",
+  "version": "2.0.0",
+  "description": "Simple file uploader in Node.js using tokens as upload authentication",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "createuser": "node createUser.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "homepage": "https://github.com/NdT3Development/nodeupload",
+  "bugs": {
+    "url": "https://github.com/NdT3Development/nodeupload/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NdT3Development/nodeupload.git"
+  },
+  "author": "NdT3Development",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.15.4",
     "express-rate-limit": "^2.9.0",
