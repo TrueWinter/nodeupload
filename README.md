@@ -1,5 +1,5 @@
 # Node Upload
-Decided to start from scratch using a different dependency for uploading. Basics are working yet this is **NOT** ready for use in a production environment.
+Decided to start from scratch using a different dependency for uploading. Basics are working but this is **NOT** ready for use in a production environment.
 
 **All screenshots use the tokens from the first GIF under the installing section**
 
