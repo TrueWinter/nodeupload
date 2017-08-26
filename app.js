@@ -137,7 +137,7 @@ app.post('/upload', apiRatelimiter, function(req, res) {
             var tmpPath = files.upload.path; // Gets location of tmp file
             console.log(tmpPath);
              var ext = require('path').extname(files.upload.name); // Gets file extension
-             if (ext === '.exe' || ext === '.html' || ext === '.bat' || ext === '.cmd') {
+             if (ext === '.exe' || ext === '.html' || ext === '.bat' || ext === '.cmd' || ext === '.sh') {
                console.log(req.ip + ' tried to upload a file with a blacklisted extension');
                return res.json({"success": false, "message": "Blacklisted file extension"});
              }

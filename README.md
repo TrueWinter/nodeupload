@@ -34,6 +34,7 @@ Some file extensions are blacklisted by default. These are...
 - .html
 - .bat
 - .cmd
+- .sh
 
 ### Admin Tools
 
