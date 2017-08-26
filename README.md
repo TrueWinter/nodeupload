@@ -43,25 +43,26 @@ You will need to use a program that can send headers with a GET request. I prefe
   - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
   ![DeleteTMP](https://i.imgur.com/XXUjU38.png)
 
-### KNOWN ISSUES
-If you get an error like this after uploading, please manually create a directory called `nodeupload_tmp` in your operating system's tmp directory: ![Error1](https://i.imgur.com/TrdaOsK.png)
-
-#### Other Issues
+#### Errors and Solutions
 You may come across some of these while using this.
 
 - EACCES (Permission denied): Make sure that you have permissions to access files in that directory.
 
 - EADDRINUSE (Address already in use):
 ![NodeEADDRINUSE](https://i.imgur.com/gjOM9Vp.png)
+
 Make sure that there is no application running that is using that port. If you don't know what process is using the port, run the following **(LINUX ONLY)** `netstat -peanut | grep 'PORT_HERE'` then run `kill 'PROCESS_ID'` (The process ID will be in a format like `12345/process`)
+
 ![KillProcess](https://i.imgur.com/zlgFpew.png)
 
 - ENOENT (No such file or directory):
 ![NoNodeUploadTMP](https://i.imgur.com/lxe00fe.png)
+
 You should not find this as NodeUpload should automatically create a new directory if none is found. However, if you do find this issue, make a new directory named `nodeupload_tmp` in your operating system's tmp directory.
 
 - ENOENT after installing dependencies: You may see an error that looks like this after installing the dependencies:
 ![SQLiteENOENT](https://i.imgur.com/bhJ7BbG.png)
+
 To fix this, delete the `node_modules` directory and run `npm install` again.
 
 - The program 'node' is currently not installed.
