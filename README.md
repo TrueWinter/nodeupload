@@ -10,6 +10,8 @@ node createUser.js # This is the script for creating users
 node app.js
 ```
 
+![InstructionsGIF](https://i.imgur.com/gMNDSZC.gif)
+
 ### Creating a New User
 After you are done installing and your friend also want to use this, run the following command and answer the questions.
 
@@ -35,6 +37,9 @@ You will need to use a program that can send headers with a GET request. I prefe
   **Delete files in temporary directory (`OPERATING_SYSTEM_TMP/nodeupload_tmp/`)**
   - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
 
+
+### KNOWN ISSUES
+If you get an error like this after uploading, please manually create a directory called `nodeupload_tmp` in your operating system's tmp directory: ![Error1](https://i.imgur.com/TrdaOsK.png)
 
 ### Please note:
 **THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0**

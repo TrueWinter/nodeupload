@@ -52,7 +52,7 @@ app.post('/upload', apiRatelimiter, function(req, res) {
 
     form.uploadDir = tmpFileDir; // Saves tmp files in tmp dir
     form.parse(req, function(err, fields, files) { // Parses form for upload
-      var uploadtoken = config.uploadtoken;
+      //var uploadtoken = config.uploadtoken;
       var usertoken = '';
 
       if (fields.token) {
@@ -96,7 +96,7 @@ app.post('/upload', apiRatelimiter, function(req, res) {
                     .toString('hex') // convert to hexadecimal format
                     .slice(0,length);   // return required number of characters
             }
-            var filenameLength = config.filenameLength;
+            var filenameLength = 6;
             var fileName = randomValueHex(filenameLength) + ext;
             var newPath = path.join(__dirname, 'files/', fileName);
             console.log(newPath);
