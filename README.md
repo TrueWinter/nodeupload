@@ -29,6 +29,12 @@ If everything worked, it should show an upload form. Just add your token where i
 
 ![UsageGIF](https://i.imgur.com/bZqbH0t.png)
 
+Some file extensions are blacklisted by default. These are...
+- .exe
+- .html
+- .bat
+- .cmd
+
 ### Admin Tools
 
 There are also some admin tools (currently, deleting files and temporary files). These require an admin token which you get from answering `true` to the `Admin` question when running `createUser.js`.
