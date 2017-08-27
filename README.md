@@ -47,10 +47,12 @@ You will need to use a program that can send headers with a GET request. I prefe
 
  **Delete files in 'files' directory:**
   - Make a GET request to `YOUR_IP:8099/admin/deletefiles` including a header with your admin token with the name `admintoken`.
+
   ![DeleteFiles](https://i.imgur.com/aVtL3d7.png)
 
   **Delete files in temporary directory (`OPERATING_SYSTEM_TMP/nodeupload_tmp/`)**
   - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
+  
   ![DeleteTMP](https://i.imgur.com/XXUjU38.png)
 
 ## Errors and Solutions
