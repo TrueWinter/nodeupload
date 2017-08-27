@@ -73,7 +73,11 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   A token (or upload token) is used for uploading files where an admin token is used for things like deleting files. An admin token cannot be used to upload and an upload token cannot be used for admin actions.
 
-  > Console full of errors. How do I get this working?
+  > Why can a user with an admin token still do admin actions after their token has been disabled.
+
+  Currently there is not a check for enabled accounts when doing admin actions.
+
+  > Console full of errors... How do I get this working?
 
   Go to the [`Errors and Solutions`](#errors-and-solutions) section below
 
