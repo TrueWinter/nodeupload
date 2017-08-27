@@ -234,7 +234,7 @@ app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you wan
 //function startDB() {
   db.serialize(function() {
     //console.log(usertoken);
-    db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
+    db.all(`SELECT admintoken, admin FROM tokens WHERE admin = 'true' AND admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
 
       if(err !== null){
          return console.log(err);
@@ -280,7 +280,7 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
   //function startDB() {
     db.serialize(function() {
       //console.log(usertoken);
-      db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
+      db.all(`SELECT admintoken, admin FROM tokens WHERE admin = 'true' AND admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
 
         if(err !== null){
            return console.log(err);
@@ -293,7 +293,7 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
           console.log(configstrings.consoleStrings.invalidAdmin.replace('{{ip}}', req.ip));
           return res.json({"success": false, "message": configstrings.webStrings.invalidAdmin});
         }
-        console.log(configstrings.consoleStrings.invalidAdmin.replace('{{ip}}', req.ip));
+        console.log(configstrings.consoleStrings.tmpClear.replace('{{ip}}', req.ip));
 
         fs.readdir(tmpFileDir, (err, files) => {
           if (err) {
@@ -308,7 +308,7 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
             });
           }
         });
-        res.json({"success": true, "message": configstrings.webStrings.tmpClear});
+        res.json({"success": true, "message": configstrings.webStrings.tmpDel});
 
         });
       });

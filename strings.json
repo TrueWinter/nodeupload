@@ -13,7 +13,7 @@
     "noFile": "No file in request",
     "blacklisted": "Blacklisted file extension",
     "disabledToken": "Token disabled",
-    "invalidAdmin": "Invalid admin token",
+    "invalidAdmin": "Invalid admin token or disabled admin token",
     "filesDel": "Files deleted",
     "tmpDel": "Temporary files deleted",
     "reqNoFile": "404 File Not Found"
@@ -25,7 +25,7 @@
     "blacklistExt": "{{ip}} tried to upload a file with a blacklisted extension",
     "disabledToken": "{{ip}} tried to upload with a disabled token",
     "reqHome": "Home page requested by {{ip}}",
-    "invalidAdmin": "{{ip}} tried to access admin actions with an incorrect admin token",
+    "invalidAdmin": "{{ip}} tried to access admin actions with an incorrect or disabled admin token",
     "dirClear": "{{ip}} requested a file directory clear",
     "tmpClear": "{{ip}} requested a tmp directory clear",
     "reqNoFile": "File ` {{file}} ` requested by ` {{ip}} ` but not found",
@@ -38,5 +38,18 @@
     "admin": "Admin (true/false): ",
     "incorrect": "Incorrect option",
     "output": "Email: {{email}} \n Token: {{token}} \n Enabled: {{enabled}} \n Admin: {{admin}} \n Admin Token: {{admintoken}}"
+  },
+  "manageUser": {
+    "manageUser": "NodeUpload User Management",
+    "manageUserNote": "NOTE: This is not for user creation. Use createUser.js for that",
+    "doWhat0": "What do you want to do? \n",
+    "doWhat1": " [1] Reroll upload token for a user \n",
+    "doWhat2": " [2] Reroll admin token for a user \n",
+    "doWhat3": " [3] Disable a user token (DOES NOT DISABLE ADMIN TOKEN) \n",
+    "doWhat4": " [4] Disable admin token (DOES NOT DISABLE NORMAL TOKEN) \n",
+    "doWhat5": " [5] Enable a user token (DOES NOT ENABLE ADMIN TOKEN) \n",
+    "doWhat6": " [6] Enable an admin token (DOES NOT ENABLE NORMAL TOKEN) \n",
+    "doWhatAnswer": "Answer (possible options 1-4): ",
+    "userEmail": "User email: "
   }
 }
