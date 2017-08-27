@@ -318,5 +318,5 @@ app.get('*', function(req, res) {
 });
 
 app.listen(config.port, function() {
-  console.log('Ready to go');
+  console.log('Ready to go on port ' + config.port);
 });

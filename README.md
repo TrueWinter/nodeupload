@@ -12,6 +12,7 @@ This project is not quite ready for public use yet, however, if you can use it i
 ```sh
 npm install
 node createUser.js # This is the script for creating users
+nano config.json # If you want to change the default settings (you can use something other than nano for this)
 node app.js
 ```
 
@@ -26,7 +27,8 @@ node createUser.js
 
 ## Usage
 
-Once the server has started, open a web browser to `YOUR_IP:8099` (there will be an option to configure this at some time).
+If the server is not already started, run `node app.js`.
+Once the server has started, open a web browser to `YOUR_IP:PORT` (where `PORT` is the port specified in the config file (`config.json`)).
 
 If everything worked, it should show an upload form. Just add your token where it says `Token`, choose a file to upload, then click the button. It should upload. If not, check the console for errors. You may need to open an issue here.
 
@@ -46,12 +48,12 @@ There are also some admin tools (currently, deleting files and temporary files).
 You will need to use a program that can send headers with a GET request. I prefer using [Postman](https://getpostman.com).
 
  **Delete files in 'files' directory:**
-  - Make a GET request to `YOUR_IP:8099/admin/deletefiles` including a header with your admin token with the name `admintoken`.
+  - Make a GET request to `YOUR_IP:PORT/admin/deletefiles` including a header with your admin token with the name `admintoken`.
 
   ![DeleteFiles](https://i.imgur.com/aVtL3d7.png)
 
   **Delete files in temporary directory (`OPERATING_SYSTEM_TMP/nodeupload_tmp/`)**
-  - Make a GET request to `YOUR_IP:8099/admin/deletetmp` including a header with your admin token with the name `admintoken`.
+  - Make a GET request to `YOUR_IP:PORT/admin/deletetmp` including a header with your admin token with the name `admintoken`.
 
   ![DeleteTMP](https://i.imgur.com/XXUjU38.png)
 
@@ -80,6 +82,22 @@ You will need to use a program that can send headers with a GET request. I prefe
   > Why is there no check for information already existing in the database in the  `createUser.js` file?
 
   This has not been added yet however it is a minor issue as long as you ensure that no duplicate information goes into `createUser.js`.
+
+  > Is there any way to change the port that it runs on?
+
+  To change the port that NodeUpload runs on, edit the config file (`config.json`).
+
+  > Is there any way to change the length of the generated file names of uploads?
+
+  To change the length of the auto generated file names of uploads, edit the config file (`config.json`).
+
+  > Can I contribute to the development of NodeUpload?
+
+  Yes, anyone can contribute to the development of NodeUpload. You can open a pull request to add in code or contact me using the contact form on [my website](https://www.ndt3.ml).
+
+  > I found a bug, how do I report it?
+
+  To report a bug, open an issue. Remember to include information like `It happened after I...` as this will help to find the issue.
 
   > Console full of errors... How do I get this working?
 
