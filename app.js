@@ -39,6 +39,7 @@ var os = require('os'); // Used to get OS tmp directory
 var RateLimit = require('express-rate-limit'); // Time to ratelimit...
 var sqlite3 = require('sqlite3');
 
+var configstrings = require('./strings.json');
 
 // Command line args for testing purposes.
 var commandargs = process.argv.splice(2);
@@ -46,7 +47,7 @@ var command2 = commandargs[0];
 if (command2 === 'test') {
   console.log('Running for 10 seconds');
   setTimeout(function () {
-    console.log('Done');
+    console.log(configstrings.beforeStartConsole.done);
     process.exit(0);
   }, 10000);
 }
@@ -55,16 +56,16 @@ var config = require('./config');
 var tmpFileDir = os.tmpdir() + '/nodeupload_tmp/';
 fs.access(tmpFileDir, function(err) {
   if (err) {
-    console.log('NodeUpload temporary directory not found or no permissions to access it. Attempting to create it now.');
+    console.log(configstrings.beforeStartConsole.noTMP);
     fs.mkdir(tmpFileDir, function(err) {
       if (err) {
-        return console.error('Failed to create directory' + err);
+        return console.error(configstrings.beforeStartConsole.tmpDirFail.replace('{{err}}', err));
       } //else {
       //  console.log('Temporary directory exists. Ready to go.')
       //}
     });
   } else {
-    console.log('Temporary directory exists. Ready to go.');
+    console.log(configstrings.beforeStartConsole.tmpExists);
   }
 });
 
@@ -78,13 +79,13 @@ var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
   }
-  console.log('Connected to the database.');
+  console.log(configstrings.beforeStartConsole.dbConnect);
 });
 
 var sqlAction = `SELECT name FROM sqlite_master WHERE type='table' AND name='tokens'`;
 db.get(sqlAction, (err, row) => {
   if (!row) {
-    console.log('There is nothing in the database. Please run createUser.js to create a new user');
+    console.log(configstrings.beforeStartConsole.dbNothing);
     db.close();
     fs.unlink(path.join(__dirname, 'db/database.db'));
     process.exit(0);
@@ -102,8 +103,8 @@ var apiRatelimiter = new RateLimit({
   handler: function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Retry-After', (7500 / 1000));
-    console.log(req.ip + ' was ratelimited');
-    res.status(429).json({"success": false, "message": "Ratelimited (too many requests)"});
+    console.log(configstrings.console.ratelimited.replace('{{ip}}', req.ip));
+    res.status(429).json({"success": false, "message": configstrings.webStrings.ratelimited});
   }
 });
 
@@ -122,9 +123,9 @@ app.post('/upload', apiRatelimiter, function(req, res) {
         usertoken = req.headers.token;
       }
 
-      //if (files.upload === '') {
-      //  console.log(req.ip + ' tried to upload nothing');
-      //  return res.json({"success": false, "message": "No file in request"});
+      //if (files.upload.name === '') {
+        //console.log(configstrings.consoleStrings.noFile.replace('{{ip}}', req.ip));
+        //return res.json({"success": false, "message": configstrings.webStrings.noFile});
       //}
 
       //var continueUpload = false;
@@ -148,24 +149,24 @@ app.post('/upload', apiRatelimiter, function(req, res) {
 
             }
 
-              console.log(allRows[0].token);
-              console.log(allRows[0].enabled);
+              //console.log(allRows[0].token);
+              //console.log(allRows[0].enabled);
               if (!allRows[0]) {
-                console.log(req.ip + ' tried to upload with an incorrect token');
-                return res.json({"success": false, "message": "Invalid token"});
+                console.log(configstrings.consoleStrings.invalidToken.replace('{{ip}}', req.ip));
+                return res.json({"success": false, "message": configstrings.webStrings.invalidToken});
               }
               if (allRows[0].enabled === "1") {
                 //continueUpload = true;
-                if (!files.upload) { // Checks if there is a file in request
-                  console.log(req.ip + ' tried to upload without a file');
-                  return res.json({"success": false, "message": "No file in request"});
+                if (files.upload.name === '') {
+                  console.log(configstrings.consoleStrings.noFile.replace('{{ip}}', req.ip));
+                  return res.json({"success": false, "message": configstrings.webStrings.noFile});
                 }
                 var tmpPath = files.upload.path; // Gets location of tmp file
                 console.log(tmpPath);
                  var ext = require('path').extname(files.upload.name); // Gets file extension
                  if (ext === '.exe' || ext === '.html' || ext === '.bat' || ext === '.cmd' || ext === '.sh') {
-                   console.log(req.ip + ' tried to upload a file with a blacklisted extension');
-                   return res.json({"success": false, "message": "Blacklisted file extension"});
+                   console.log(configstrings.console.blacklistExt.replace('{{ip}}', req.ip));
+                   return res.json({"success": false, "message": configstrings.webStrings.blacklisted});
                  }
                  console.log(ext);
 
@@ -182,16 +183,16 @@ app.post('/upload', apiRatelimiter, function(req, res) {
                   });
 
                 res.writeHead(200, {'content-type': 'text/plain'});
-                res.write('received upload:\n\n');
-                res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
-                res.end('\nFile uploaded: ' + fileName);
+                //res.write('received upload:\n\n');
+                //res.write(util.inspect({fields: fields, files: files}) + '\n'); // TODO: Edit response
+                res.end(configstrings.webStrings.uploaded.replace('{{file}}', fileName));
                 console.log(util.inspect({fields: fields, files: files}));
 
                 //callback(allRows);
                 //db.close();
               } else {
-                console.log(req.ip + ' tried to upload with a disabled token');
-                return res.json({"success": false, "message": "Token disabled"});
+                console.log(configstrings.consoleStrings.disabledToken.replace('{{ip}}', req.ip));
+                return res.json({"success": false, "message": configstrings.webStrings.disabledToken});
               }
             });
           });
@@ -233,11 +234,11 @@ app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you wan
 
       console.log(adminTokens);
       if (!adminTokens[0]) {
-        console.log(req.ip + ' tried to upload with an incorrect token');
-        return res.json({"success": false, "message": "Invalid token"});
+        console.log(configstrings.consoleStrings.invalidAdmin.replace('{{ip}}', req.ip));
+        return res.json({"success": false, "message": configstrings.webStrings.invalidAdmin});
       }
       //var admintoken = config.admintoken;
-        console.log(req.ip + ' requested a file directory clear');
+        console.log(configstrings.consoleStrings.dirClear.replace('{{ip}}', req.ip));
         var fileDir = path.join(__dirname, 'files/');
         fs.readdir(fileDir, (err, files) => {
           if (err) {
@@ -254,7 +255,7 @@ app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you wan
             });
           }
         });
-        res.json({"success": true, "message": "Files deleted"});
+        res.json({"success": true, "message": configstrings.webStrings.filesDel});
 
         });
       });
@@ -279,10 +280,10 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
 
         console.log(adminTokens);
         if (!adminTokens[0]) {
-          console.log(req.ip + ' tried to upload with an incorrect token');
-          return res.json({"success": false, "message": "Invalid token"});
+          console.log(configstrings.consoleStrings.invalidAdmin.replace('{{ip}}', req.ip));
+          return res.json({"success": false, "message": configstrings.webStrings.invalidAdmin});
         }
-        console.log(req.ip + ' requested a file directory clear');
+        console.log(configstrings.consoleStrings.invalidAdmin.replace('{{ip}}', req.ip));
 
         fs.readdir(tmpFileDir, (err, files) => {
           if (err) {
@@ -297,7 +298,7 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
             });
           }
         });
-        res.json({"success": true, "message": "Temporary files deleted"});
+        res.json({"success": true, "message": configstrings.webStrings.tmpClear});
 
         });
       });
@@ -310,13 +311,13 @@ app.get('*', function(req, res) {
 
   res.sendFile(reqFile, function(err) {
     if (err) {
-      res.send('404 File Not Found');
-      return console.log('File `' + req.path + '` requested by `' + req.ip + '` but not found');
+      res.send(configstrings.webStrings.reqNoFile);
+      return console.log(configstrings.consoleStrings.reqNoFile.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
     }
-    console.log('File `' + req.path + '` requested by `' + req.ip + '`');
+    console.log(configstrings.consoleStrings.req.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
   });
 });
 
 app.listen(config.port, function() {
-  console.log('Ready to go on port ' + config.port);
+  console.log(configstrings.consoleStrings.ready.replace('{{port}}', config.port));
 });

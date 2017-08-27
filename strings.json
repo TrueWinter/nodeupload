@@ -1,0 +1,36 @@
+{
+  "beforeStartConsole": {
+    "done": "Done",
+    "noTMP": "NodeUpload temporary directory not found or no permissions to access it. Attempting to create it now.",
+    "tmpDirFail": "Failed to create directory, {{err}}",
+    "tmpExists": "Temporary directory exists. Ready to go.",
+    "dbConnect": "Connected to the database.",
+    "dbNothing": "There is nothing in the database. Please run createUser.js to create a new user"
+  },
+  "webStrings": {
+    "ratelimited": "Ratelimited (too many requests)",
+    "invalidToken": "Invalid token",
+    "noFile": "No file in request",
+    "blacklisted": "Blacklisted file extension",
+    "disabledToken": "Token disabled",
+    "invalidAdmin": "Invalid admin token",
+    "filesDel": "Files deleted",
+    "tmpDel": "Temporary files deleted",
+    "reqNoFile": "404 File Not Found",
+    "uploaded": "File uploaded: {{file}}"
+  },
+  "consoleStrings": {
+    "ratelimited": "{{ip}} was ratelimited",
+    "invalidToken": "{{ip}} tried to upload with an incorrect token",
+    "noFile": "{{ip}} tried to upload without a file",
+    "blacklistExt": "{{ip}} tried to upload a file with a blacklisted extension",
+    "disabledToken": "{{ip}} tried to upload with a disabled token",
+    "reqHome": "Home page requested by {{ip}}",
+    "invalidAdmin": "{{ip}} tried to access admin actions with an incorrect admin token",
+    "dirClear": "{{ip}} requested a file directory clear",
+    "tmpClear": "{{ip}} requested a tmp directory clear",
+    "reqNoFile": "File ` {{file}} ` requested by ` {{ip}} ` but not found",
+    "req": "File ` {{file}} ` requested by ` {{ip}} `",
+    "ready": "Ready to go on port {{port}}"
+  }
+}

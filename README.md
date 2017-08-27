@@ -91,6 +91,10 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   To change the length of the auto generated file names of uploads, edit the config file (`config.json`).
 
+  > Is there any way to change the responses (console output, web responses, etc)?
+
+  Yes, there is. Edit the `strings.json` file. More info coming soon.
+
   > Can I contribute to the development of NodeUpload?
 
   Yes, anyone can contribute to the development of NodeUpload. You can open a pull request to add in code or contact me using the contact form on [my website](https://www.ndt3.ml).
