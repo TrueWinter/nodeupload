@@ -75,7 +75,11 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Why can a user with an admin token still do admin actions after their token has been disabled.
 
-  Currently there is not a check for enabled accounts when doing admin actions.
+  Currently there is not a check for enabled accounts when doing admin actions. Uploads for disabled accounts will still be blocked however admin actions won't.
+
+  > Why is there no check for information already existing in the database in the  `createUser.js` file?
+
+  This has not been added yet however it is a minor issue as long as you ensure that no duplicate information goes into `createUser.js`.
 
   > Console full of errors... How do I get this working?
 
