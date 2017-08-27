@@ -31,23 +31,13 @@ SOFTWARE.
 var uuid = require('uuid');
 var readline = require('readline');
 var sqlite3 = require('sqlite3');
+var configstrings = require('./strings.json');
 
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
   }
-  console.log('Connected to the database.');
-});
-
-
-
-process.on('SIGINT', function() {
-  console.log('Closing database connection');
-  db.close();
-  setTimeout(function () {
-    console.log('Database connection closed.');
-    process.exit(0);
-  }, 1000);
+  console.log(configstrings.beforeStartConsole.dbConnect);
 });
 
 setTimeout(function () { // Because I don't know what else to do to stop it from trying to connect while asking questions and making the questions not work
@@ -61,7 +51,7 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
   var enabled;
   var admin;
   var admintoken;
-  console.log('User creation');
+  console.log(configstrings.userCreate.userCreate);
 
   function startDB() {
     db.serialize(function() {
@@ -75,15 +65,15 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
     db.close();
   }
 
-  rl.question("Email: ", function(answer) {
+  rl.question(configstrings.userCreate.email, function(answer) {
 
     email = answer;
     token = uuid.v4();
     enabled = true;
 
-    rl.question("Admin (true/false): ", function(answer) {
+    rl.question(configstrings.userCreate.admin, function(answer) {
       admin = answer;
-      console.log('Admin: ' + admin);
+      //console.log('Admin: ' + admin);
 
       if (admin === "true" || admin === "false") {
 
@@ -91,19 +81,15 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
           admintoken = uuid.v4();
         }
       } else {
-        return console.log('Incorrect option');
+        return console.log(configstrings.userCreate.incorrect);
       }
 
-      console.log('Email: ' + email + '\n Token: ' + token + '\n Enabled: ' + enabled + '\n Admin: ' + admin + '\n Admin Token: ' + admintoken);
-
-      rl.on('SIGINT', function() {
-        console.log('Closing database connection');
-        db.close();
-        setTimeout(function () {
-          console.log('Database connection closed.');
-          process.exit(0);
-        }, 1000);
-      });
+      console.log(configstrings.userCreate.output
+        .replace('{{email}}', email)
+        .replace('{{token}}', token)
+        .replace('{{enabled}}', enabled)
+        .replace('{{admin}}', admin)
+        .replace('{{admintoken}}', admintoken));
 
       rl.on('close', () => {
         startDB();

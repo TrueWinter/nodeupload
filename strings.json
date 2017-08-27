@@ -16,8 +16,7 @@
     "invalidAdmin": "Invalid admin token",
     "filesDel": "Files deleted",
     "tmpDel": "Temporary files deleted",
-    "reqNoFile": "404 File Not Found",
-    "uploaded": "File uploaded: {{file}}"
+    "reqNoFile": "404 File Not Found"
   },
   "consoleStrings": {
     "ratelimited": "{{ip}} was ratelimited",
@@ -32,5 +31,12 @@
     "reqNoFile": "File ` {{file}} ` requested by ` {{ip}} ` but not found",
     "req": "File ` {{file}} ` requested by ` {{ip}} `",
     "ready": "Ready to go on port {{port}}"
+  },
+  "userCreate": {
+    "userCreate": "User creation",
+    "email": "Email: ",
+    "admin": "Admin (true/false): ",
+    "incorrect": "Incorrect option",
+    "output": "Email: {{email}} \n Token: {{token}} \n Enabled: {{enabled}} \n Admin: {{admin}} \n Admin Token: {{admintoken}}"
   }
 }

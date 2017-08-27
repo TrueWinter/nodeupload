@@ -182,10 +182,10 @@ app.post('/upload', apiRatelimiter, function(req, res) {
 
                   });
 
-                res.writeHead(200, {'content-type': 'text/plain'});
+                //res.writeHead(200, {'content-type': 'text/plain'});
                 //res.write('received upload:\n\n');
                 //res.write(util.inspect({fields: fields, files: files}) + '\n'); // TODO: Edit response
-                res.end(configstrings.webStrings.uploaded.replace('{{file}}', fileName));
+                res.json({"success": true, "message": fileName}); // Will not add an option to change this is `strings.json`
                 console.log(util.inspect({fields: fields, files: files}));
 
                 //callback(allRows);
