@@ -27,6 +27,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+
 var formidable = require('formidable'); // File upload
 var express = require('express'); // Web server
 var util = require('util'); // Used for response
@@ -37,7 +39,19 @@ var os = require('os'); // Used to get OS tmp directory
 var RateLimit = require('express-rate-limit'); // Time to ratelimit...
 var sqlite3 = require('sqlite3');
 
-//var config = require('./config');
+
+// Command line args for testing purposes.
+var commandargs = process.argv.splice(2);
+var command2 = commandargs[0];
+if (command2 === 'test') {
+  console.log('Running for 10 seconds');
+  setTimeout(function () {
+    console.log('Done');
+    process.exit(0);
+  }, 10000);
+}
+
+var config = require('./config');
 var tmpFileDir = os.tmpdir() + '/nodeupload_tmp/';
 fs.access(tmpFileDir, function(err) {
   if (err) {
@@ -108,35 +122,40 @@ app.post('/upload', apiRatelimiter, function(req, res) {
         usertoken = req.headers.token;
       }
 
-      if (files.upload.name === '') {
-        console.log(req.ip + ' tried to upload nothing');
-        return res.json({"success": false, "message": "No file in request"});
-      }
-      startDB();
-      var continueUpload = false;
+      //if (files.upload === '') {
+      //  console.log(req.ip + ' tried to upload nothing');
+      //  return res.json({"success": false, "message": "No file in request"});
+      //}
+
+      //var continueUpload = false;
 
       //var sqlAct = `SELECT token FROM tokens WHERE token = ${usertoken}`;
       //let sql = `SELECT * FROM tokens`;
       //let token = usertoken;
+      function randomValueHex (length) { // Generates random string for file name
+          return crypto.randomBytes(Math.ceil(length/2))
+              .toString('hex') // convert to hexadecimal format
+              .slice(0,length);   // return required number of characters
+      }
       function startDB() {
         db.serialize(function() {
           console.log(usertoken);
           db.all(`SELECT token, enabled FROM tokens WHERE token = '${usertoken}'`, function(err, allRows) {
 
-            if(err != null){
+            if(err !== null){
                return console.log(err);
               //callback(err);
 
             }
 
               console.log(allRows[0].token);
-              console.log(allRows[0].enabled)
+              console.log(allRows[0].enabled);
               if (!allRows[0]) {
                 console.log(req.ip + ' tried to upload with an incorrect token');
                 return res.json({"success": false, "message": "Invalid token"});
               }
               if (allRows[0].enabled === "1") {
-                continueUpload = true;
+                //continueUpload = true;
                 if (!files.upload) { // Checks if there is a file in request
                   console.log(req.ip + ' tried to upload without a file');
                   return res.json({"success": false, "message": "No file in request"});
@@ -149,25 +168,23 @@ app.post('/upload', apiRatelimiter, function(req, res) {
                    return res.json({"success": false, "message": "Blacklisted file extension"});
                  }
                  console.log(ext);
-                function randomValueHex (length) { // Generates random string for file name
-                    return crypto.randomBytes(Math.ceil(length/2))
-                        .toString('hex') // convert to hexadecimal format
-                        .slice(0,length);   // return required number of characters
-                }
-                var filenameLength = 6;
-                var fileName = randomValueHex(filenameLength) + ext;
+
+                //var filenameLength = 6;
+                var fileName = randomValueHex(config.filenameLength) + ext;
                 var newPath = path.join(__dirname, 'files/', fileName);
                 console.log(newPath);
 
                   fs.rename(tmpPath, newPath, function (err) {
-                    if (err) throw err;
+                    if (err) {
+                      throw err;
+                    }
 
                   });
 
                 res.writeHead(200, {'content-type': 'text/plain'});
                 res.write('received upload:\n\n');
                 res.write(util.inspect({fields: fields, files: files})); // TODO: Edit response
-                res.end('\nFile uploaded: ' + fileName)
+                res.end('\nFile uploaded: ' + fileName);
                 console.log(util.inspect({fields: fields, files: files}));
 
                 //callback(allRows);
@@ -179,6 +196,8 @@ app.post('/upload', apiRatelimiter, function(req, res) {
             });
           });
         }
+
+        startDB();
 
       //if (continueUpload) { // Checks if token in body or headers is equal to real token
 
@@ -203,10 +222,10 @@ app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you wan
 
 //function startDB() {
   db.serialize(function() {
-    console.log(usertoken);
+    //console.log(usertoken);
     db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
 
-      if(err != null){
+      if(err !== null){
          return console.log(err);
         //callback(err);
 
@@ -221,11 +240,17 @@ app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you wan
         console.log(req.ip + ' requested a file directory clear');
         var fileDir = path.join(__dirname, 'files/');
         fs.readdir(fileDir, (err, files) => {
-          if (err) throw error;
-
+          if (err) {
+            throw err;
+          }
+          var delFilePath = fileDir;
           for (const file of files) {
-            fs.unlink(path.join(fileDir, file), err => {
-              if (err) throw error;
+            var delFile = delFilePath + file;
+            console.log(delFilePath + file);
+            fs.unlink(delFile, err => {
+              if (err) {
+                throw err;
+              }
             });
           }
         });
@@ -241,12 +266,12 @@ app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you wan
 app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when temp files are too many
 
 
-  function startDB() {
+  //function startDB() {
     db.serialize(function() {
-      console.log(usertoken);
+      //console.log(usertoken);
       db.all(`SELECT token FROM tokens WHERE admintoken = '${req.headers.admintoken}'`, function(err, adminTokens) {
 
-        if(err != null){
+        if(err !== null){
            return console.log(err);
           //callback(err);
 
@@ -260,11 +285,15 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
         console.log(req.ip + ' requested a file directory clear');
 
         fs.readdir(tmpFileDir, (err, files) => {
-          if (err) throw error;
+          if (err) {
+            throw err;
+          }
 
           for (const file of files) {
             fs.unlink(path.join(tmpFileDir, file), err => {
-              if (err) throw error;
+              if (err) {
+                throw err;
+              }
             });
           }
         });
@@ -272,7 +301,7 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
 
         });
       });
-    }
+    //}
 });
 
 app.get('*', function(req, res) {
@@ -282,12 +311,12 @@ app.get('*', function(req, res) {
   res.sendFile(reqFile, function(err) {
     if (err) {
       res.send('404 File Not Found');
-      return console.log('File \`' + req.path + '\` requested by \`' + req.ip + '\` but not found');
+      return console.log('File `' + req.path + '` requested by `' + req.ip + '` but not found');
     }
-    console.log('File \`' + req.path + '\` requested by \`' + req.ip + '\`');
+    console.log('File `' + req.path + '` requested by `' + req.ip + '`');
   });
 });
 
-app.listen('8099', function() {
+app.listen(config.port, function() {
   console.log('Ready to go');
 });

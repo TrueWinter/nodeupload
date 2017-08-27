@@ -1,7 +1,10 @@
 # Node Upload
 Decided to start from scratch using a different dependency for uploading. Basics are working but this is **NOT** ready for use in a production environment.
 
-**All screenshots use the tokens from the first GIF under the installing section**
+**All screenshots use the tokens from the first GIF under the installing section. The screenshts may not be up to date so don't worry if the output in console looks slightly differnt.**
+Most if not all commits are checked using JShint and ESLint on the command line and ESLint in Atom. Files checked this way:
+- app.js
+- createUser.js
 
 ## Installing
 This project is not quite ready for public use yet, however, if you can use it if you want to.
@@ -58,19 +61,19 @@ You may come across some of these while using this.
 - EADDRINUSE (Address already in use):
 ![NodeEADDRINUSE](https://i.imgur.com/gjOM9Vp.png)
 
-Make sure that there is no application running that is using that port. If you don't know what process is using the port, run the following **(LINUX ONLY)** `netstat -peanut | grep 'PORT_HERE'` then run `kill 'PROCESS_ID'` (The process ID will be in a format like `12345/process`)
+  Make sure that there is no application running that is using that port. If you don't know what process is using the port, run the following **(LINUX ONLY)** `netstat -peanut | grep 'PORT_HERE'` then run `kill 'PROCESS_ID'` (The process ID will be in a format like `12345/process`)
 
-![KillProcess](https://i.imgur.com/zlgFpew.png)
+  ![KillProcess](https://i.imgur.com/zlgFpew.png)
 
 - ENOENT (No such file or directory):
 ![NoNodeUploadTMP](https://i.imgur.com/lxe00fe.png)
 
-You should not find this as NodeUpload should automatically create a new directory if none is found. However, if you do find this issue, make a new directory named `nodeupload_tmp` in your operating system's tmp directory.
+  You should not find this as NodeUpload should automatically create a new directory if none is found. However, if you do find this issue, make a new directory named `nodeupload_tmp` in your operating system's tmp directory.
 
 - ENOENT after installing dependencies: You may see an error that looks like this after installing the dependencies:
 ![SQLiteENOENT](https://i.imgur.com/bhJ7BbG.png)
 
-To fix this, delete the `node_modules` directory and run `npm install` again.
+  To fix this, delete the `node_modules` directory and run `npm install` again.
 
 - The program 'node' is currently not installed.
 ![NodeNotInstall](https://i.imgur.com/xUHT8FJ.png)
@@ -81,7 +84,7 @@ To fix this, delete the `node_modules` directory and run `npm install` again.
   Same as above.
 
 ## Please note:
-**THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0**
+**THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0 OR ON A TESTING SERVER RUNNING UBUNTU 16.04**
 
 ## LICENSE
 MIT License
