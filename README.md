@@ -113,11 +113,15 @@ You may come across some of these while using this.
   Follow the instructions [here](https://nodejs.org/en/download/package-manager/)
 
 - `The program 'npm' is currently not installed.`
+
   Same as above.
 
 - `Error: Cannot find module`
     ![NodeModule](https://i.imgur.com/YjtkIqQ.png)
+
     Run `npm install` in the terminal
+
+  **For other errors, search for the error online or open an issue**
 
 ## Please note:
 **THIS HAS NOT BEEN TESTED YET IN A PRODUCTION ENVIRONMENT. DATABASE FEATURES NOT FULLY TESTED. ALL DEVELOPMENT TESTS WERE RUN ON LINUX MINT 17.3 64 BIT USING NODE V8.4.0 AND NPM 5.3.0 OR ON A TESTING SERVER RUNNING UBUNTU 16.04**
