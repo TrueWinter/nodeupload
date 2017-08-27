@@ -32,7 +32,11 @@ var uuid = require('uuid');
 var readline = require('readline');
 var sqlite3 = require('sqlite3');
 var configstrings = require('./strings.json');
+var os = require('os');
+require('pkginfo')(module, 'version'); // To get NodeUpload version
 
+process.title = 'NodeUpload User Creation';
+console.log(`NodeUpload v${module.exports.version} User Creation \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()}`);
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
@@ -61,8 +65,7 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
       stmt.run(email, token, enabled, admin, admintoken);
       stmt.finalize();
       });
-
-    db.close();
+      db.close();
   }
 
   rl.question(configstrings.userCreate.email, function(answer) {

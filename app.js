@@ -38,7 +38,7 @@ var crypto = require('crypto'); // Used to generate file name
 var os = require('os'); // Used to get OS tmp directory
 var RateLimit = require('express-rate-limit'); // Time to ratelimit...
 var sqlite3 = require('sqlite3'); // Database
-var pkginfo = require('pkginfo')(module, 'version'); // To get NodeUpload version
+require('pkginfo')(module, 'version'); // To get NodeUpload version
 
 var configstrings = require('./strings.json'); // Strings
 process.title = 'NodeUpload';
@@ -102,7 +102,7 @@ process.on('SIGINT', function() {
     console.log('Bye');
     process.exit(0);
   }, 500);
-})
+});
 
 var apiRatelimiter = new RateLimit({
   windowMs: 7500, // 7.5 second window
