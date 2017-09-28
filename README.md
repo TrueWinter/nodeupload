@@ -146,7 +146,7 @@ You may come across some of these while using this.
 
 - `Error: Cannot find module`
 
-![NodeModule](https://i.imgur.com/YjtkIqQ.png)
+  ![NodeModule](https://i.imgur.com/YjtkIqQ.png)
 
     Run `npm install` in the terminal
 
