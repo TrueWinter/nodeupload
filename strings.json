@@ -28,9 +28,10 @@
     "invalidAdmin": "{{ip}} tried to access admin actions with an incorrect or disabled admin token",
     "dirClear": "{{ip}} requested a file directory clear",
     "tmpClear": "{{ip}} requested a tmp directory clear",
-    "reqNoFile": "File ` {{file}} ` requested by ` {{ip}} ` but not found",
-    "req": "File ` {{file}} ` requested by ` {{ip}} `",
-    "ready": "Ready to go on port {{port}}"
+    "reqNoFile": "File {{file}} requested by {{ip}} but not found",
+    "req": "File {{file}} requested by {{ip}}",
+    "ready": "Ready to go on port {{port}}",
+    "uploaded": "{{ip}} uploaded {{file}} with token: {{token}}"
   },
   "userCreate": {
     "userCreate": "User creation",
@@ -40,6 +41,7 @@
     "output": "Email: {{email}} \n Token: {{token}} \n Enabled: {{enabled}} \n Admin: {{admin}} \n Admin Token: {{admintoken}}"
   },
   "manageUser": {
+    "NOTE_TO_YOU": "THIS  IS FOR A FUTURE UPDATE, DO NOT WORRY ABOUT THIS PART FOR NOW",
     "manageUser": "NodeUpload User Management",
     "manageUserNote": "NOTE: This is not for user creation. Use createUser.js for that",
     "doWhat0": "What do you want to do? \n",

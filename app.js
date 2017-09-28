@@ -38,11 +38,11 @@ var crypto = require('crypto'); // Used to generate file name
 var os = require('os'); // Used to get OS tmp directory
 var RateLimit = require('express-rate-limit'); // Time to ratelimit...
 var sqlite3 = require('sqlite3'); // Database
-require('pkginfo')(module, 'version'); // To get NodeUpload version
 
+var packagejson = require('./package.json');
 var configstrings = require('./strings.json'); // Strings
 process.title = 'NodeUpload';
-console.log(`NodeUpload v${module.exports.version} \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()}`);
+console.log(`NodeUpload v${packagejson.version} \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()} \n Temporary Directory Location: ${path.join(os.tmpdir(), 'nodeupload_tmp')}`);
 // Command line args for testing purposes.
 var commandargs = process.argv.splice(2);
 var command2 = commandargs[0];
@@ -76,6 +76,8 @@ fs.access(tmpFileDir, function(err) {
 var app = express();
 
 app.set('trust proxy', '127.0.0.1');
+
+app.use(express.static('files')); // For serving files
 
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
@@ -174,8 +176,8 @@ app.post('/upload', apiRatelimiter, function(req, res) {
                 var tmpPath = files.upload.path; // Gets location of tmp file
                 console.log(tmpPath);
                  var ext = require('path').extname(files.upload.name); // Gets file extension
-                 if (ext === '.exe' || ext === '.html' || ext === '.bat' || ext === '.cmd' || ext === '.sh') {
-                   console.log(configstrings.console.blacklistExt.replace('{{ip}}', req.ip));
+                 if (config.extBlacklist.indexOf(ext) >= 0) {
+                   console.log(configstrings.consoleStrings.blacklistExt.replace('{{ip}}', req.ip));
                    return res.json({"success": false, "message": configstrings.webStrings.blacklisted});
                  }
                  console.log(ext);
@@ -196,7 +198,8 @@ app.post('/upload', apiRatelimiter, function(req, res) {
                 //res.write('received upload:\n\n');
                 //res.write(util.inspect({fields: fields, files: files}) + '\n'); // TODO: Edit response
                 res.json({"success": true, "message": fileName}); // Will not add an option to change this is `strings.json`
-                console.log(util.inspect({fields: fields, files: files}));
+                //console.log(util.inspect({fields: fields, files: files}));
+                console.log(configstrings.consoleStrings.uploaded.replace('{{ip}}', req.ip).replace('{{file}}', fileName).replace('{{token}}', usertoken));
 
                 //callback(allRows);
                 //db.close();
@@ -218,14 +221,19 @@ app.post('/upload', apiRatelimiter, function(req, res) {
 app.get('/', function(req, res) {
   // show a file upload form
   console.log('Home page requested by '+ req.ip);
-  res.writeHead(200, {'content-type': 'text/html'});
-  res.end(
-    '<form action="/upload" enctype="multipart/form-data" method="post">'+
-    'Token: <input type="text" name="token"><br>'+
-    '<input type="file" name="upload"><br>'+
-    '<input type="submit" value="Upload">'+
-    '</form>'
-  );
+  if (config.indexForm) {
+    res.writeHead(200, {'content-type': 'text/html'});
+    res.end(
+      '<form action="/upload" enctype="multipart/form-data" method="post">'+
+      'Token: <input type="text" name="token"><br>'+
+      '<input type="file" name="upload"><br>'+
+      '<input type="submit" value="Upload">'+
+      '</form>'
+    );
+  } else {
+    res.end(config.indexFormDisabledMessage);
+
+  }
 });
 
 app.get('/admin/deletefiles', apiRatelimiter, function(req, res) { // If you want to delete all files saved in './files' directory
@@ -316,16 +324,33 @@ app.get('/admin/deletetmp', apiRatelimiter, function(req, res) { // For when tem
 });
 
 app.get('*', function(req, res) {
-  var reqFile = path.join(__dirname, 'files', req.path);
+//  var reqFile = path.join(__dirname, 'files', req.path);
   //console.log(reqFile);
 
-  res.sendFile(reqFile, function(err) {
-    if (err) {
-      res.send(configstrings.webStrings.reqNoFile);
-      return console.log(configstrings.consoleStrings.reqNoFile.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
-    }
-    console.log(configstrings.consoleStrings.req.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
-  });
+  //res.sendFile(reqFile, function(err) {
+    //if (err) {
+    //res.send(configstrings.webStrings.reqNoFile);
+  //  console.log(configstrings.consoleStrings.reqNoFile.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
+    //}
+    //console.log(configstrings.consoleStrings.req.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
+  //});
+
+  //function (req, res/*, next*/) {
+    fs.access(path.join(__dirname, 'files', req.path), function(e) {
+      if (e && e.code === 'ENOENT') {
+        if (req.path === '/favicon.ico') {
+          return;
+        }
+        console.log(configstrings.consoleStrings.reqNoFile.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
+        res.send(configstrings.webStrings.reqNoFile);
+      } else {
+        console.log(configstrings.consoleStrings.req.replace('{{ip}}', req.ip).replace('{{file}}', req.path));
+      }
+    });
+
+    //next();
+  //});
+
 });
 
 app.listen(config.port, function() {

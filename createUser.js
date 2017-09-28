@@ -33,10 +33,10 @@ var readline = require('readline');
 var sqlite3 = require('sqlite3');
 var configstrings = require('./strings.json');
 var os = require('os');
-require('pkginfo')(module, 'version'); // To get NodeUpload version
+var packagejson = require('./package.json');
 
 process.title = 'NodeUpload User Creation';
-console.log(`NodeUpload v${module.exports.version} User Creation \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()}`);
+console.log(`NodeUpload v${packagejson.version} User Creation \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()}`);
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
@@ -61,11 +61,21 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
     db.serialize(function() {
       db.run("CREATE TABLE IF NOT EXISTS tokens (email TEXT, token TEXT, enabled TEXT, admin TEXT, admintoken TEXT)");
       console.log(email);
-      var stmt = db.prepare("INSERT INTO tokens (email, token, enabled, admin, admintoken) VALUES (?, ?, ?, ?, ?)");
-      stmt.run(email, token, enabled, admin, admintoken);
-      stmt.finalize();
+
+      db.all(`SELECT * FROM tokens WHERE email = '${email}'`, function(err, allRows) {
+          if (!allRows[0]) {
+            var stmt = db.prepare("INSERT INTO tokens (email, token, enabled, admin, admintoken) VALUES (?, ?, ?, ?, ?)");
+            stmt.run(email, token, enabled, admin, admintoken);
+            stmt.finalize();
+          } else {
+            return console.log("Already exists in database");
+          }
+          db.close();
       });
-      db.close();
+
+
+      });
+
   }
 
   rl.question(configstrings.userCreate.email, function(answer) {

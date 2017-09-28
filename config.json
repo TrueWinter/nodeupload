@@ -1,4 +1,7 @@
 {
   "filenameLength": 6,
-  "port": "8099"
+  "port": "8099",
+  "indexForm": true,
+  "indexFormDisabledMessage": "Hi, this is NodeUpload. The upload form here has been disabled. Change the config file to enable it.",
+  "extBlacklist": [".exe", ".sh", ".cmd", ".bat", ".html", ".htm"]
 }
