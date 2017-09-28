@@ -4,7 +4,7 @@ Decided to start from scratch using a different dependency for uploading. Basics
 **All screenshots use the tokens from the first GIF under the installing section. The screenshts may not be up to date so don't worry if the output in console looks slightly differnt.**
 
 ## Installing
-This project is not quite ready for public use yet, however, if you can use it if you want to.
+Should be easy to install and use
 
 ```sh
 npm install
@@ -91,7 +91,7 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Is there any way to change the responses (console output, web responses, etc)?
 
-  Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. More info coming soon.
+  Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. More info coming soon.
 
   > Can I contribute to the development of NodeUpload?
 
@@ -107,7 +107,7 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Why does it only say ready for production here now even though NodeUpload is in version 4.0.0?
 
-  Decided not to use v0.x.x as the version numbers as NodeUpload was probably production ready with a few changes to the code. Other reason: I don't actually know why I did it like this... ¯\\\_(ツ)\_/¯
+  Decided not to use v0.x.x as the development version numbers as NodeUpload was probably production ready with a few changes to the code. Other reason: I don't actually know why I did it like this... ¯\\\_(ツ)\_/¯
 
   > Console full of errors... How do I get this working?
 
@@ -145,6 +145,7 @@ You may come across some of these while using this.
   Same as above.
 
 - `Error: Cannot find module`
+
 ![NodeModule](https://i.imgur.com/YjtkIqQ.png)
 
     Run `npm install` in the terminal
