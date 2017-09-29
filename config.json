@@ -3,5 +3,12 @@
   "port": "8099",
   "indexForm": true,
   "indexFormDisabledMessage": "Hi, this is NodeUpload. The upload form here has been disabled. Change the config file to enable it.",
-  "extBlacklist": [".exe", ".sh", ".cmd", ".bat", ".html", ".htm"]
+  "extBlacklist": [".exe", ".sh", ".cmd", ".bat", ".html", ".htm"],
+  "ratelimitAfter": 5,
+  "ratelimitTime": 7500,
+  "logs": {
+    "dir": "logs",
+    "file": "NodeUpload_log.txt",
+    "format": "{{ time }} | {{ log }} \n"
+  }
 }

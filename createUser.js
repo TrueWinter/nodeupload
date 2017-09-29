@@ -34,14 +34,24 @@ var sqlite3 = require('sqlite3');
 var configstrings = require('./strings.json');
 var os = require('os');
 var packagejson = require('./package.json');
+var config = require('./config.json');
+var logger = require('./logger.js').both;
+var logConf = {
+  dir: config.logs.dir,
+  file: config.logs.file,
+  logFormat: config.logs.format
+}
+function log(m) {
+  logger(logConf, m);
+}
 
 process.title = 'NodeUpload User Creation';
-console.log(`NodeUpload v${packagejson.version} User Creation \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()}`);
+log(`NodeUpload v${packagejson.version} User Creation \n Process ID: ${process.pid} \n Platform: ${os.type()} ${os.release()} ${os.arch()} ${os.platform()}`);
 var db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
   }
-  console.log(configstrings.beforeStartConsole.dbConnect);
+  log(configstrings.beforeStartConsole.dbConnect);
 });
 
 setTimeout(function () { // Because I don't know what else to do to stop it from trying to connect while asking questions and making the questions not work
@@ -55,12 +65,12 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
   var enabled;
   var admin;
   var admintoken;
-  console.log(configstrings.userCreate.userCreate);
+  log(configstrings.userCreate.userCreate);
 
   function startDB() {
     db.serialize(function() {
       db.run("CREATE TABLE IF NOT EXISTS tokens (email TEXT, token TEXT, enabled TEXT, admin TEXT, admintoken TEXT)");
-      console.log(email);
+      log(email);
 
       db.all(`SELECT * FROM tokens WHERE email = '${email}'`, function(err, allRows) {
           if (!allRows[0]) {
@@ -68,7 +78,7 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
             stmt.run(email, token, enabled, admin, admintoken);
             stmt.finalize();
           } else {
-            return console.log("Already exists in database");
+            return log("Already exists in database");
           }
           db.close();
       });
@@ -86,7 +96,7 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
 
     rl.question(configstrings.userCreate.admin, function(answer) {
       admin = answer;
-      //console.log('Admin: ' + admin);
+      //log('Admin: ' + admin);
 
       if (admin === "true" || admin === "false") {
 
@@ -94,10 +104,10 @@ setTimeout(function () { // Because I don't know what else to do to stop it from
           admintoken = uuid.v4();
         }
       } else {
-        return console.log(configstrings.userCreate.incorrect);
+        return log(configstrings.userCreate.incorrect);
       }
 
-      console.log(configstrings.userCreate.output
+      log(configstrings.userCreate.output
         .replace('{{email}}', email)
         .replace('{{token}}', token)
         .replace('{{enabled}}', enabled)
