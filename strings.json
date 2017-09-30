@@ -25,6 +25,7 @@
     "blacklistExt": "{{ip}} tried to upload a file with a blacklisted extension",
     "disabledToken": "{{ip}} tried to upload with a disabled token",
     "reqHome": "Home page requested by {{ip}}",
+    "reqDisabledHome": "Home page (with disabled form) requested by {{ip}}",
     "invalidAdmin": "{{ip}} tried to access admin actions with an incorrect or disabled admin token",
     "dirClear": "{{ip}} requested a file directory clear",
     "tmpClear": "{{ip}} requested a tmp directory clear",

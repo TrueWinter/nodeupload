@@ -43,7 +43,7 @@ exports.file = function (f, m) {
   if (f.dir) {
     dir = path.join(__dirname, f.dir);
     fs.access(dir, function(err) {
-      if (err) {
+      if (err && err === 'ENOENT') {
         console.log("Creating logs directory now...");
         fs.mkdir(dir, function(err) {
           if (err) {

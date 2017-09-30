@@ -212,8 +212,8 @@ app.post('/upload', apiRatelimiter, function(req, res) {
 
 app.get('/', function(req, res) {
   // show a file upload form, can be disabled in config file.
-  log('Home page requested by '+ req.ip);
   if (config.indexForm) {
+    log(configstrings.consoleStrings.reqHome.replace('{{ip}}', req.ip));
     res.writeHead(200, {'content-type': 'text/html'});
     res.end(
       '<form action="/upload" enctype="multipart/form-data" method="post">'+
@@ -223,6 +223,7 @@ app.get('/', function(req, res) {
       '</form>'
     );
   } else {
+    log(configstrings.consoleStrings.reqDisabledHome.replace('{{ip}}', req.ip));
     res.end(config.indexFormDisabledMessage);
 
   }
