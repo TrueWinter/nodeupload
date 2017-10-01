@@ -1,8 +1,3 @@
-FOR PULL REQUESTS, PLEASE OPEN A PULL REQUEST WITH THE FOLLOWING FORMAT (Any line with multiple dashes does not get included in the issue description itself. YOU HAVE TO MARK ALL THE CHECKBOXES IN ORDER FOR THE PULL REQUEST TO BE CONSIDERED)
-
------ TEMPLATE STARTS BELOW -----
---- TITLE: "\<Insert a short description of the reason for the pull request\>" ---
-
 Pull Request Description: \<Insert a detailed description of the  issue\>
 
 Reason for Pull Request: \<Include a detailed description of the reason you have made the pull request and all changes made\>

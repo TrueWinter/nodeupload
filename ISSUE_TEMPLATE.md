@@ -1,8 +1,3 @@
-FOR BUGS, PLEASE OPEN AN ISSUE WITH THE FOLLOWING FORMAT (Any line with multiple dashes does not get included in the issue description itself. YOU HAVE TO MARK ALL THE CHECKBOXES IN ORDER FOR THE REPORT TO BE MARKED AS A BUG)
-
------ TEMPLATE STARTS BELOW -----
---- TITLE: "\<Insert a short description of the issue as the title\>" ---
-
 Bug Description: \<Insert a detailed description of the  issue\>
 
 Steps to Reproduce: \<As I will need to find where the bug is in the code, I will need your help to tell me what happened to cause the bug\>
