@@ -98,15 +98,15 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Can I contribute to the development of NodeUpload by opening pull requests?
 
-  Yes, you can open a pull request but please use the format [here](https://github.com/NdT3Development/nodeupload/blob/master/PULL_REQUEST_TEMPLATE.md)
+  Yes, you can open a pull request but please use the format [here](https://github.com/NdT3Development/nodeupload/blob/master/PULL_REQUESTS.md)
 
   > I found a bug, how do I report it?
 
-  To report a bug, open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/ISSUE_TEMPLATE.md)
+  To report a bug, open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/BUGS.md)
 
   > Can I request a feature?
 
-  Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/FEATURE_REQUEST_TEMPLATE.md)
+  Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/FEATURE_REQUESTS.md)
 
   > Why was NodeUpload only 'production ready' in version 4.0.0?
 
