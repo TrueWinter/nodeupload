@@ -1,7 +1,8 @@
 # NodeUpload
+###### (Yeah, not the best name but I can't think of good names)
 Decided to start from scratch using a different dependency for uploading. Basics are working ~~but this is **NOT** ready for use in a production environment.~~ and I think it is ready for running in a production environment.
 
-**All screenshots use the tokens from the first GIF under the installing section. The screenshts may not be up to date so don't worry if the output in console looks slightly differnt.**
+**All screenshots use the tokens from the first GIF under the installing section. The screenshots may not be up to date so don't worry if the output in console looks slightly different.**
 
 ## Installing
 Should be easy to install and use
@@ -27,7 +28,7 @@ node createUser.js
 If the server is not already started, run `node app.js`.
 Once the server has started, open a web browser to `YOUR_IP:PORT` (where `PORT` is the port specified in the config file (`config.json`)).
 
-If everything worked, it should show an upload form. Just add your token where it says `Token`, choose a file to upload, then click the button. It should upload. If not, check the console for errors. You may need to open an issue here.
+If everything worked, it should show an upload form (unless disabled in the config file). Just add your token where it says `Token`, choose a file to upload, then click the button. It should upload. If not, check the console for errors. You may need to open an issue here.
 
 ![UsageGIF](https://i.imgur.com/bZqbH0t.png)
 
@@ -93,19 +94,19 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. More info coming soon.
 
-  > Can I contribute to the development of NodeUpload?
+  > Can I contribute to the development of NodeUpload by opening pull requests?
 
-  Yes, anyone can contribute to the development of NodeUpload. You can open a pull request to add in code or contact me using the contact form on [my website](https://www.ndt3.ml).
+  Yes, you can open a pull request but please use the format [here](https://github.com/NdT3Development/nodeupload/blob/master/PULL_REQUEST_TEMPLATE.md)
 
   > I found a bug, how do I report it?
 
-  To report a bug, open an issue. Remember to include information like `It happened after I...` as this will help to find the issue.
+  To report a bug, open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/ISSUE_TEMPLATE.md)
 
   > Can I request a feature?
 
-  Yes, I am open to feedback and feature requests. Just open an issue or contact me using the contact form on [my website](https://www.ndt3.ml).
+  Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/FEATURE_REQUEST_TEMPLATE.md)
 
-  > Why does it only say ready for production here now even though NodeUpload is in version 4.0.0?
+  > Why was NodeUpload only 'production ready' in version 4.0.0?
 
   Decided not to use v0.x.x as the development version numbers as NodeUpload was probably production ready with a few changes to the code. Other reason: I don't actually know why I did it like this... ¯\\\_(ツ)\_/¯
 
