@@ -1,11 +1,13 @@
 # NodeUpload
 ###### (Yeah, not the best name but I can't think of good names)
-Decided to start from scratch using a different dependency for uploading. Basics are working ~~but this is **NOT** ready for use in a production environment.~~ and I think it is ready for running in a production environment.
+Decided to start from scratch using a different dependency for uploading. Basics are working and I think it is ready for running in a production environment.
 
 **All screenshots use the tokens from the first GIF under the installing section. The screenshots may not be up to date so don't worry if the output in console looks slightly different.**
 
 ## Installing
 Should be easy to install and use
+
+You will need Git and Node *v8+*
 
 ```sh
 npm install
