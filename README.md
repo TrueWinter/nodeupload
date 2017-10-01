@@ -7,7 +7,7 @@ Decided to start from scratch using a different dependency for uploading. Basics
 ## Installing
 Should be easy to install and use
 
-You will need Git and Node *v8+*
+You will need Git and Node **v8+**
 
 ```sh
 npm install
