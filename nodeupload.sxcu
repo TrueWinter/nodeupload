@@ -1,0 +1,12 @@
+﻿{
+  "Name": "NodeUpload",
+  "DestinationType": "FileUploader",
+  "RequestType": "POST",
+  "RequestURL": "YOUR_NODEUPLOAD_URL_HERE/upload",
+  "FileFormName": "upload",
+  "Headers": {
+    "token": "YOUR_UPLOAD_TOKEN_HERE"
+  },
+  "ResponseType": "Text",
+  "URL": "YOUR_NODEUPLOAD_URL_HERE/$json:message$"
+}

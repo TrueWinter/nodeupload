@@ -9,6 +9,7 @@
 | [Server](#server) | Requests (GET, POST...) to the server |
 | [Configuration File (config.json)](#configuration-file-configjson) | Gives info about the configuration options available |
 | [Strings](#strings) | Gives info about the strings.json file |
+| [Sharex Configuration](#sharex-configuration) | The ShareX configuration instructions |
 
 ## Server
 
@@ -111,3 +112,23 @@ Uploads a file
 | userCreate.output | User creation output | \{\{email\}\}, \{\{token\}\}, \{\{enabled\}\}, \{\{admin\}\}, \{\{admintoken\}\} |
 
 \**Template strings here refer to what you can use in a string and automatically have it replaced with something else in the NodeUpload code*
+
+## ShareX Configuration
+
+The ShareX .sxcu file looks like this:
+
+`﻿{
+  "Name": "NodeUpload",
+  "DestinationType": "FileUploader",
+  "RequestType": "POST",
+  "RequestURL": "YOUR_NODEUPLOAD_URL_HERE/upload",
+  "FileFormName": "upload",
+  "Headers": {
+    "token": "YOUR_UPLOAD_TOKEN_HERE"
+  },
+  "ResponseType": "Text",
+  "URL": "YOUR_NODEUPLOAD_URL_HERE/$json:message$"
+}`
+
+- Replace `YOUR_NODEUPLOAD_URL_HERE` (in `RequestURL` and `URL`) with the URL NodeUpload is running on
+- Replace `YOUR_UPLOAD_TOKEN_HERE` (in `token`) with your upload token
