@@ -1,0 +1,1 @@
+This is the NodeUpload docs part of the repository. If you want to look at the NodeUpload docs website (instead of reading through the file here), [nodeupload.ndt3.ml](https://nodeupload.ndt3.ml) is the way to go.
