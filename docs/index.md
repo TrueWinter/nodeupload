@@ -42,7 +42,7 @@ Headers OR Fields Required:
 
 | Header | Content |
 | --- | --- |
-| admintoken | \<Your Admin Token\> |
+| token | \<Your Upload Token\> |
 
 
 Fields Required:
