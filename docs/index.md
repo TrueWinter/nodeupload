@@ -68,39 +68,39 @@ Uploads a file
 
 | String | Description  | Template Strings Available\* |
 | --- | --- | --- |
-| beforeStartConsole.done | Test run | N/A
-| beforeStartConsole.noTMP | No temporary directory exists | N/A
-| beforeStartConsole.tmpDirFail | Failed to create temporary directory | {{err}}
-| beforeStartConsole.tmpExists | Temporary directory already exists | N/A
-| beforeStartConsole.dbConnect | Connected to the database | N/A
-| beforeStartConsole.dbNothing | Nothing in database | N/A
-| webStrings.ratelimited | Ratelimited | N/A
-| webStrings.invalidToken | Invalid upload token | N/A
-| webStrings.noFile | No file in request | N/A
-| webStrings.blacklisted | Blacklisted file extension | N/A
-| webStrings.disabledToken | Disabled token used for upload | N/A
-| webStrings.invalidAdmin | Invalid admin token | N/A
-| webStrings.filesDel | Files deleted | N/A
-| webStrings.tmpDel | Temporary files deleted | N/A
-| webStrings.reqNoFile | 404 | N/A
-| consoleStrings.ratelimited | Ratelimited | {{ip}}
-| consoleStrings.invalidToken | Invalid token | {{ip}}
-| consoleStrings.noFile | No file in request | {{ip}}
-| consoleStrings.blacklistedExt | Blacklisted file extension | {{ip}}
-| consoleStrings.disabledToken | Disabled admin token used in request | {{ip}}
-| consoleStrings.reqHome | Home page requested | {{ip}}
-| consoleStrings.reqDisabledHome | Home page with disabled form requested | {{ip}}
-| consoleStrings.invalidAdmin | Invalid admin token | {{ip}}
-| consoleStrings.dirClear | Files deleted | {{ip}}
-| consoleStrings.tmpClear | Temporary directory cleared | {{ip}}
-| consoleStrings.reqNoFile | 404 | {{file}}, {{ip}}
-| consoleStrings.req | Request | {{file}}, {{ip}}
-| consoleStrings.ready | Ready | {{port}}
-| consoleStrings.uploaded | File uploaded | {{ip}}, {{file}}, {{token}}
-| userCreate.userCreate | User creation | N/A
-| userCreate.email | Email | N/A
-| userCreate.admin | Admin token | N/A
-| userCreate.incorrect | Invalid option | N/A
+| beforeStartConsole.done | Test run | N/A |
+| beforeStartConsole.noTMP | No temporary directory exists | N/A |
+| beforeStartConsole.tmpDirFail | Failed to create temporary directory | {{err}} |
+| beforeStartConsole.tmpExists | Temporary directory already exists | N/A |
+| beforeStartConsole.dbConnect | Connected to the database | N/A |
+| beforeStartConsole.dbNothing | Nothing in database | N/A |
+| webStrings.ratelimited | Ratelimited | N/A |
+| webStrings.invalidToken | Invalid upload token | N/A |
+| webStrings.noFile | No file in request | N/A |
+| webStrings.blacklisted | Blacklisted file extension | N/A |
+| webStrings.disabledToken | Disabled token used for upload | N/A |
+| webStrings.invalidAdmin | Invalid admin token | N/A |
+| webStrings.filesDel | Files deleted | N/A |
+| webStrings.tmpDel | Temporary files deleted | N/A |
+| webStrings.reqNoFile | 404 | N/A |
+| consoleStrings.ratelimited | Ratelimited | {{ip}} |
+| consoleStrings.invalidToken | Invalid token | {{ip}} |
+| consoleStrings.noFile | No file in request | {{ip}} |
+| consoleStrings.blacklistedExt | Blacklisted file extension | {{ip}} |
+| consoleStrings.disabledToken | Disabled admin token used in request | {{ip}} |
+| consoleStrings.reqHome | Home page requested | {{ip}} |
+| consoleStrings.reqDisabledHome | Home page with disabled form requested | {{ip}} |
+| consoleStrings.invalidAdmin | Invalid admin token | {{ip}} |
+| consoleStrings.dirClear | Files deleted | {{ip}} |
+| consoleStrings.tmpClear | Temporary directory cleared | {{ip}} |
+| consoleStrings.reqNoFile | 404 | {{file}}, {{ip}} |
+| consoleStrings.req | Request | {{file}}, {{ip}} |
+| consoleStrings.ready | Ready | {{port}} |
+| consoleStrings.uploaded | File uploaded | {{ip}}, {{file}}, {{token}} |
+| userCreate.userCreate | User creation | N/A |
+| userCreate.email | Email | N/A |
+| userCreate.admin | Admin token | N/A |
+| userCreate.incorrect | Invalid option | N/A |
 | userCreate.output | User creation output | {{email}}, {{token}}, {{enabled}}, {{admin}}, {{admintoken}} |
 
 \**Template strings here refer to what you can use in a string and automatically have it replaced with something else in the NodeUpload code*
