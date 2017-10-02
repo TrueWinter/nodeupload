@@ -65,7 +65,7 @@ Uploads a file
 ## Strings
 #### NodeUpload gives users the option to customise the strings used
 *String defaults are **not** given in table below to save space. If you would like the default strings, please use the [strings.json file on the NodeUpload GitHub](https://github.com/NdT3Development/nodeupload/blob/master/strings.json)*
----
+
 | String | Description  | Template Strings Available\* |
 | --- | --- | --- |
 | beforeStartConsole.done | Test run | N/A
