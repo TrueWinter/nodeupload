@@ -64,6 +64,10 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   NodeUpload is a Node.js server application that lets you run your own private file upload service. It uses randomly generated tokens for upload authentication and includes some admin features that require an admin token (which are generated when running  `createUser.js` and answering `true` to the `Admin` question).
 
+  > Does it have support for ShareX?
+
+  Yes it does! Please look at [the ShareX section of the docs](https://nodeupload.ndt3.ml/#sharex-configuration) for more details.
+
   > How are uploads done?
 
   When a user uploads a file, it will be stored in a directory in your operating system's temp directory. Then there will be a connection to the database to check that the token is valid. If it is valid, the file gets moved to the `files` directory in the app's directory.
@@ -94,7 +98,7 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Is there any way to change the responses (console output, web responses, etc.)?
 
-  Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. More info coming soon.
+  Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. Please see [the docs](https://nodeupload.ndt3.ml) for more details.
 
   > Can I contribute to the development of NodeUpload by opening pull requests?
 
