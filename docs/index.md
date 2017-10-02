@@ -101,5 +101,6 @@ Uploads a file
 | userCreate.email | Email | N/A
 | userCreate.admin | Admin token | N/A
 | userCreate.incorrect | Invalid option | N/A
-| userCreate.output | User creation output | {{email}}, {{token}}, {{enabled}}, {{admin}}, {{admintoken}}
+| userCreate.output | User creation output | {{email}}, {{token}}, {{enabled}}, {{admin}}, {{admintoken}} |
+
 \**Template strings here refer to what you can use in a string and automatically have it replaced with something else in the NodeUpload code*
