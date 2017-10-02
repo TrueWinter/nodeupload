@@ -40,14 +40,12 @@ Deletes files from the NodeUpload temporary directory (in the operating system's
 
 Headers OR Fields Required:
 
-Headers:
-
 | Header | Content |
 | --- | --- |
 | admintoken | \<Your Admin Token\> |
 
 
-Fields:
+Fields Required:
 
 | Fields | Content |
 | --- | --- |
