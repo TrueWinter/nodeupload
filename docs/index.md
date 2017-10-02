@@ -60,7 +60,7 @@ Uploads a file
 | ratelimitTime | The window in which the ratelimitAfter limit applies (in milliseconds) | 7500 |
 | logs.dir | The logs directory | logs |
 | logs.file | The file in the logs directory | NodeUpload_log.txt |
-| logs.format | The format used by the custom logger | {{ time }} \| {{ log }} \\n |
+| logs.format | The format used by the custom logger | \{\{ time \}\} \| \{\{ log \}\} \\n |
 
 ## Strings
 #### NodeUpload gives users the option to customise the strings used
@@ -70,7 +70,7 @@ Uploads a file
 | --- | --- | --- |
 | beforeStartConsole.done | Test run | N/A |
 | beforeStartConsole.noTMP | No temporary directory exists | N/A |
-| beforeStartConsole.tmpDirFail | Failed to create temporary directory | {{err}} |
+| beforeStartConsole.tmpDirFail | Failed to create temporary directory | \{\{err\}\} |
 | beforeStartConsole.tmpExists | Temporary directory already exists | N/A |
 | beforeStartConsole.dbConnect | Connected to the database | N/A |
 | beforeStartConsole.dbNothing | Nothing in database | N/A |
@@ -83,24 +83,24 @@ Uploads a file
 | webStrings.filesDel | Files deleted | N/A |
 | webStrings.tmpDel | Temporary files deleted | N/A |
 | webStrings.reqNoFile | 404 | N/A |
-| consoleStrings.ratelimited | Ratelimited | {{ip}} |
-| consoleStrings.invalidToken | Invalid token | {{ip}} |
-| consoleStrings.noFile | No file in request | {{ip}} |
-| consoleStrings.blacklistedExt | Blacklisted file extension | {{ip}} |
-| consoleStrings.disabledToken | Disabled admin token used in request | {{ip}} |
-| consoleStrings.reqHome | Home page requested | {{ip}} |
-| consoleStrings.reqDisabledHome | Home page with disabled form requested | {{ip}} |
-| consoleStrings.invalidAdmin | Invalid admin token | {{ip}} |
-| consoleStrings.dirClear | Files deleted | {{ip}} |
-| consoleStrings.tmpClear | Temporary directory cleared | {{ip}} |
-| consoleStrings.reqNoFile | 404 | {{file}}, {{ip}} |
-| consoleStrings.req | Request | {{file}}, {{ip}} |
-| consoleStrings.ready | Ready | {{port}} |
-| consoleStrings.uploaded | File uploaded | {{ip}}, {{file}}, {{token}} |
+| consoleStrings.ratelimited | Ratelimited | \{\{ip\}\} |
+| consoleStrings.invalidToken | Invalid token | \{\{ip\}\} |
+| consoleStrings.noFile | No file in request | \{\{ip\}\} |
+| consoleStrings.blacklistedExt | Blacklisted file extension | \{\{ip\}\} |
+| consoleStrings.disabledToken | Disabled admin token used in request | \{\{ip\}\} |
+| consoleStrings.reqHome | Home page requested | \{\{ip\}\} |
+| consoleStrings.reqDisabledHome | Home page with disabled form requested | \{\{ip\}\} |
+| consoleStrings.invalidAdmin | Invalid admin token | \{\{ip\}\} |
+| consoleStrings.dirClear | Files deleted | \{\{ip\}\} |
+| consoleStrings.tmpClear | Temporary directory cleared | \{\{ip\}\} |
+| consoleStrings.reqNoFile | 404 | \{\{file\}\}, \{\{ip\}\} |
+| consoleStrings.req | Request | \{\{file\}\}, \{\{ip\}\} |
+| consoleStrings.ready | Ready | \{\{port\}\} |
+| consoleStrings.uploaded | File uploaded | \{\{ip\}\}, \{\{file\}\}, \{\{token\}\} |
 | userCreate.userCreate | User creation | N/A |
 | userCreate.email | Email | N/A |
 | userCreate.admin | Admin token | N/A |
 | userCreate.incorrect | Invalid option | N/A |
-| userCreate.output | User creation output | {{email}}, {{token}}, {{enabled}}, {{admin}}, {{admintoken}} |
+| userCreate.output | User creation output | \{\{email\}\}, \{\{token\}\}, \{\{enabled\}\}, \{\{admin\}\}, \{\{admintoken\}\} |
 
 \**Template strings here refer to what you can use in a string and automatically have it replaced with something else in the NodeUpload code*
