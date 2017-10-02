@@ -119,15 +119,25 @@ The ShareX .sxcu file looks like this:
 
 `﻿{
   "Name": "NodeUpload",
+
   "DestinationType": "FileUploader",
+
   "RequestType": "POST",
+
   "RequestURL": "YOUR_NODEUPLOAD_URL_HERE/upload",
+
   "FileFormName": "upload",
+
   "Headers": {
+
     "token": "YOUR_UPLOAD_TOKEN_HERE"
+
   },
+
   "ResponseType": "Text",
+
   "URL": "YOUR_NODEUPLOAD_URL_HERE/$json:message$"
+  
 }`
 
 - Replace `YOUR_NODEUPLOAD_URL_HERE` (in `RequestURL` and `URL`) with the URL NodeUpload is running on
