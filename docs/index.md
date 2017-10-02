@@ -4,38 +4,43 @@
 ## Server
 
 **GET /**
+
 Returns an upload form if not disabled in configuration file
 
 **GET /admin/deletefiles**
 
 Headers Required:
+
 | Header | Content |
 | --- | --- |
-| admintoken | Your Admin Token |
+| admintoken | \<Your Admin Token\> |
 
 Deletes files in the files directory of NodeUpload
 
 **GET /admin/deletetmp**
 
 Headers Required:
+
 | Header | Content |
 | --- | --- |
-| admintoken | Your Admin Token |
+| admintoken | \<Your Admin Token\> |
 
 Deletes files from the NodeUpload temporary directory (in the operating system's temporary directory)
 
 **POST /upload**
 
 Headers OR Fields Required:
+
 | Header | Content |
 | --- | --- |
-| admintoken | <Your Admin Token> |
+| admintoken | \<Your Admin Token\> |
 
 
-Fields Required
+Fields Required:
+
 | Fields | Content |
 | --- | --- |
-| upload | <File> |
+| upload | \<File\> |
 
 
 Uploads a file
