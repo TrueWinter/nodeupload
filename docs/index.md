@@ -117,7 +117,7 @@ Uploads a file
 
 The ShareX .sxcu file looks like this:
 
-```﻿json
+```JSON
 {
   "Name": "NodeUpload",
   "DestinationType": "FileUploader",
