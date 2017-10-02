@@ -122,8 +122,8 @@ process.on('SIGINT', function() {
 });
 
 var apiRatelimiter = new RateLimit({
-  windowMs: config.ratelimitAfter, // 7.5 second window
-  max: config.ratelimitTime, // start blocking after 5 requests
+  windowMs: config.ratelimitTime, // 7.5 second window
+  max: config.ratelimitAfter, // start blocking after 5 requests
   delayAfter: 0, // disable slow down of requests
   delayMs: 0,
   headers: true,
