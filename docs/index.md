@@ -1,6 +1,15 @@
 # [NodeUpload](https://ndt3.ml/r/nodeupload) Docs
 ***(TEMPORARY DOCS FOR NODE UPLOAD)***
 
+
+## Table of Contents
+
+| Section | About Section |
+| --- | --- |
+| [Server](#server) | Requests (GET, POST...) to the server |
+| [Configuration File (config.json)](#configuration-file-configjson) | Gives info about the configuration options available |
+| [Strings](#strings) | Gives info about the strings.json file |
+
 ## Server
 
 **GET /**
