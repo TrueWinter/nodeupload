@@ -1,4 +1,7 @@
 # NodeUpload
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9053e5d3bcba40839645b3c193434329)](https://www.codacy.com/app/NdT3Development/nodeupload?utm_source=github.com&utm_medium=referral&utm_content=NdT3Development/nodeupload&utm_campaign=badger)
+
 ###### (Yeah, not the best name but I can't think of good names)
 Decided to start from scratch using a different dependency for uploading. Basics are working and I think it is ready for running in a production environment.
 
