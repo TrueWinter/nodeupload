@@ -30,4 +30,26 @@ table {
   p {
     text-align: center;
   }
+
+  #top {
+    display: none;
+  }
+
+  .totop {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAMAAADDpiTIAAABU1BMV…AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWv4CrOqxSDBafYQAAAAASUVORK5CYII=);
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    bottom: 0;
+    right: 0;
+    margin: 30px 40px;
+    position: fixed;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    vertical-align: middle;
+  }
   
