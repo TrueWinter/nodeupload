@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <meta name="description" content="NodeUpload : NodeUpload is a Node.JS server application that lets you run your own private file upload service.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/be-4a150d-63.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/bc-f2f954-91.css" />
+
+<!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>NodeUpload Docs | NodeUpload</title>
+<meta property="og:title" content="NodeUpload Docs" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="NodeUpload is a Node.JS server application that lets you run your own private file upload service." />
+<meta property="og:description" content="NodeUpload is a Node.JS server application that lets you run your own private file upload service." />
+<link rel="canonical" href="https://nodeupload.ndt3.ml/" />
+<meta property="og:url" content="http://nodeupload.ndt3.ml/" />
+<meta property="og:site_name" content="NodeUpload" />
+<script type="application/ld+json">
+{"name":"NodeUpload","description":"NodeUpload is a Node.JS server application that lets you run your own private file upload service.","author":null,"@type":"WebSite","url":"http://nodeupload.ndt3.ml/","image":null,"publisher":null,"headline":"NodeUpload Docs","dateModified":null,"datePublished":null,"sameAs":null,"mainEntityOfPage":null,"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<script>
+$(document).ready(function () {
+    $.getScript("assets/js/da-d67b91-89.js");
+});
+</script>
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/NdT3Development/nodeupload">View on GitHub</a>
+
+          <h1 id="project_title">NodeUpload</h1>
+          <h2 id="project_tagline">NodeUpload is a Node.JS server application that lets you run your own private file upload service.</h2>
+
+          
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1 id="nodeupload-docs"><a href="https://ndt3.ml/r/nodeupload">NodeUpload</a> Docs</h1>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>About Section</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#server">Server</a></td>
+      <td>Requests (GET, POST…) to the server</td>
+    </tr>
+    <tr>
+      <td><a href="#configuration-file-configjson">Configuration File (config.json)</a></td>
+      <td>Gives info about the configuration options available</td>
+    </tr>
+    <tr>
+      <td><a href="#strings">Strings</a></td>
+      <td>Gives info about the strings.json file</td>
+    </tr>
+    <tr>
+      <td><a href="#sharex-configuration">Sharex Configuration</a></td>
+      <td>The ShareX configuration instructions</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="server">Server</h2>
+
+<p><strong>GET /</strong></p>
+
+<p>Returns an upload form if not disabled in configuration file</p>
+
+<p><strong>GET /admin/deletefiles</strong></p>
+
+<p>Headers Required:</p>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>Header</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>admintoken</td>
+      <td>&lt;Your Admin Token&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Deletes files in the files directory of NodeUpload</p>
+
+<p><strong>GET /admin/deletetmp</strong></p>
+
+<p>Headers Required:</p>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>Header</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>admintoken</td>
+      <td>&lt;Your Admin Token&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Deletes files from the NodeUpload temporary directory (in the operating system’s temporary directory)</p>
+
+<p><strong>POST /upload</strong></p>
+
+<p>Headers OR Fields Required:</p>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>Header</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>token</td>
+      <td>&lt;Your Upload Token&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Fields Required:</p>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>Fields</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>upload</td>
+      <td>&lt;File&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Uploads a file</p>
+
+<h2 id="configuration-file-configjson">Configuration File (config.json)</h2>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>What it is for</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>filenameLength</td>
+      <td>The length of generated file names</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>port</td>
+      <td>What port NodeUpload will run on</td>
+      <td>8099</td>
+    </tr>
+    <tr>
+      <td>indexForm</td>
+      <td>If the upload form on / is shown</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>indexFormDisabledMessage</td>
+      <td>The message displayed if the upload form is disabled</td>
+      <td>Hi, this is NodeUpload. The upload form here has been disabled. Change the config file to enable it.</td>
+    </tr>
+    <tr>
+      <td>extBlacklist</td>
+      <td>An array of blacklisted file extensions</td>
+      <td>[“.exe”, “.sh”, “.cmd”, “.bat”, “.html”, “.htm”]</td>
+    </tr>
+    <tr>
+      <td>ratelimitAfter</td>
+      <td>Number of requests to start ratelimiting after</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>ratelimitTime</td>
+      <td>The window in which the ratelimitAfter limit applies (in milliseconds)</td>
+      <td>7500</td>
+    </tr>
+    <tr>
+      <td>logs.dir</td>
+      <td>The logs directory</td>
+      <td>logs</td>
+    </tr>
+    <tr>
+      <td>logs.file</td>
+      <td>The file in the logs directory</td>
+      <td>NodeUpload_log.txt</td>
+    </tr>
+    <tr>
+      <td>logs.format</td>
+      <td>The format used by the custom logger</td>
+      <td>{{ time }} | {{ log }} \n</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="strings">Strings</h2>
+<h4 id="nodeupload-gives-users-the-option-to-customise-the-strings-used">NodeUpload gives users the option to customise the strings used</h4>
+<p><em>String defaults are <strong>not</strong> given in table below to save space. If you would like the default strings, please use the <a href="https://github.com/NdT3Development/nodeupload/blob/master/strings.json">strings.json file on the NodeUpload GitHub</a></em></p>
+
+<table class="desktoptable">
+  <thead>
+    <tr>
+      <th>String</th>
+      <th>Description</th>
+      <th>Template Strings Available*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>beforeStartConsole.done</td>
+      <td>Test run</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>beforeStartConsole.noTMP</td>
+      <td>No temporary directory exists</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>beforeStartConsole.tmpDirFail</td>
+      <td>Failed to create temporary directory</td>
+      <td>{{err}}</td>
+    </tr>
+    <tr>
+      <td>beforeStartConsole.tmpExists</td>
+      <td>Temporary directory already exists</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>beforeStartConsole.dbConnect</td>
+      <td>Connected to the database</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>beforeStartConsole.dbNothing</td>
+      <td>Nothing in database</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.ratelimited</td>
+      <td>Ratelimited</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.invalidToken</td>
+      <td>Invalid upload token</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.noFile</td>
+      <td>No file in request</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.blacklisted</td>
+      <td>Blacklisted file extension</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.disabledToken</td>
+      <td>Disabled token used for upload</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.invalidAdmin</td>
+      <td>Invalid admin token</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.filesDel</td>
+      <td>Files deleted</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.tmpDel</td>
+      <td>Temporary files deleted</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>webStrings.reqNoFile</td>
+      <td>404</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.ratelimited</td>
+      <td>Ratelimited</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.invalidToken</td>
+      <td>Invalid token</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.noFile</td>
+      <td>No file in request</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.blacklistedExt</td>
+      <td>Blacklisted file extension</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.disabledToken</td>
+      <td>Disabled admin token used in request</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.reqHome</td>
+      <td>Home page requested</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.reqDisabledHome</td>
+      <td>Home page with disabled form requested</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.invalidAdmin</td>
+      <td>Invalid admin token</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.dirClear</td>
+      <td>Files deleted</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.tmpClear</td>
+      <td>Temporary directory cleared</td>
+      <td>{{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.reqNoFile</td>
+      <td>404</td>
+      <td>{{file}}, {{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.req</td>
+      <td>Request</td>
+      <td>{{file}}, {{ip}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.ready</td>
+      <td>Ready</td>
+      <td>{{port}}</td>
+    </tr>
+    <tr>
+      <td>consoleStrings.uploaded</td>
+      <td>File uploaded</td>
+      <td>{{ip}}, {{file}}, {{token}}</td>
+    </tr>
+    <tr>
+      <td>userCreate.userCreate</td>
+      <td>User creation</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>userCreate.email</td>
+      <td>Email</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>userCreate.admin</td>
+      <td>Admin token</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>userCreate.incorrect</td>
+      <td>Invalid option</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>userCreate.output</td>
+      <td>User creation output</td>
+      <td>{{email}}, {{token}}, {{enabled}}, {{admin}}, {{admintoken}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>*<em>Template strings here refer to what you can use in a string and automatically have it replaced with something else in the NodeUpload code</em></p>
+
+<h2 id="sharex-configuration">ShareX Configuration</h2>
+
+<p>The ShareX .sxcu file looks like this:</p>
+
+<pre><code class="language-JSON">{
+  "Name": "NodeUpload",
+  "DestinationType": "FileUploader",
+  "RequestType": "POST",
+  "RequestURL": "YOUR_NODEUPLOAD_URL_HERE/upload",
+  "FileFormName": "upload",
+  "Headers": {
+    "token": "YOUR_UPLOAD_TOKEN_HERE"
+  },
+  "ResponseType": "Text",
+  "URL": "YOUR_NODEUPLOAD_URL_HERE/$json:message$"
+}
+</code></pre>
+
+<ul>
+  <li>Replace <code class="highlighter-rouge">YOUR_NODEUPLOAD_URL_HERE</code> (in <code class="highlighter-rouge">RequestURL</code> and <code class="highlighter-rouge">URL</code>) with the URL NodeUpload is running on</li>
+  <li>Replace <code class="highlighter-rouge">YOUR_UPLOAD_TOKEN_HERE</code> (in <code class="highlighter-rouge">token</code>) with your upload token</li>
+</ul>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        
+        <p class="copyright">NodeUpload maintained by <a href="https://github.com/NdT3Development">NdT3Development</a></p>
+        
+        <p>Using a modified theme from and published using <a href="https://pages.github.com">GitHub Pages.</a></p>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

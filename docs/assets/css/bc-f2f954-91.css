@@ -5,11 +5,11 @@ table {
     padding: 10px;
     text-align: left;
   }
-  .desktop tbody tr:nth-child(odd) {
-    background: #eee;
+  .desktoptable tbody tr:nth-child(even) {
+    background: #e2d7d7;
   }
-  .generated_for_mobile tr.odd {
-    background: #eee;
+  .generated_for_mobile tr.even {
+    background: #e2d7d7;
   }
   .generated_for_mobile {
     display: none;
@@ -18,7 +18,7 @@ table {
     .generated_for_mobile {
       display: table;
     }
-    .desktop {
+    .desktoptable {
       display: none;
     }
   }
