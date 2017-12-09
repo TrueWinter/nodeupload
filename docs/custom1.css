@@ -1,0 +1,32 @@
+@import "compass/css3";
+
+table {
+  margin: 50px; 
+  td, th {
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+.desktop {
+  tbody tr:nth-child(odd) {
+    background: #eee;
+  }
+}
+
+.generated_for_mobile tr.odd {
+  background: #eee;
+}
+
+.generated_for_mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .generated_for_mobile {
+    display: table;
+  }
+  .desktop {
+    display: none;
+  }
+}

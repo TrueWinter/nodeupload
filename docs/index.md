@@ -1,7 +1,13 @@
 # [NodeUpload](https://ndt3.ml/r/nodeupload) Docs
 ***(TEMPORARY DOCS FOR NODE UPLOAD)***
 
-
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="custom1.js"></script>
+  <link rel="stylesheet" href="custom1.css">
+  
 ## Table of Contents
 
 | Section | About Section |

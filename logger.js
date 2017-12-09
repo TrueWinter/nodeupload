@@ -40,6 +40,14 @@ exports.file = function (f, m) {
   var dir;
   var p;
 
+  function log() {
+    setTimeout(function () {
+      var file = fs.createWriteStream(p, {flags: 'a'});
+      file.write(f.logFormat.replace('{{ time }}', moment().format()).replace('{{ log }}', m) + '\n');
+      //console.log(p);
+    }, 50);
+  }
+
   if (f.dir) {
     dir = path.join(__dirname, f.dir);
     fs.access(dir, function(err) {
@@ -59,15 +67,6 @@ exports.file = function (f, m) {
   } else {
     p = path.join(__dirname, f.file);
     log();
-  }
-
-  function log() {
-    setTimeout(function () {
-      var file = fs.createWriteStream(p, {flags: 'a'});
-      file.write(f.logFormat.replace('{{ time }}', moment().format()).replace('{{ log }}', m) + '\n');
-      //console.log(p);
-    }, 50);
-
   }
 };
 
