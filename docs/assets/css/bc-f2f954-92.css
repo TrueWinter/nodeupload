@@ -31,10 +31,6 @@ table {
     text-align: center;
   }
 
-  #top {
-    display: none;
-  }
-
   .totop {
     background-image: url('/assets/img/up-arrow.png');
     z-index: 2;
