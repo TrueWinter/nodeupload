@@ -1,6 +1,9 @@
 table {
     margin: auto;
   }
+.link {
+    content: '\f0c1';
+  }
   table td, table th {
     padding: 10px;
     text-align: center;
