@@ -3,7 +3,8 @@ table {
   }
   table td, table th {
     padding: 10px;
-    text-align: left;
+    text-align: center;
+    vertical-align: middle;
   }
   .desktoptable tbody tr:nth-child(even) {
     background: #e2d7d7;
