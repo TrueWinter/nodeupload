@@ -2,7 +2,9 @@ table {
     margin: auto;
   }
 .link {
-    content: '\f0c1';
+    content: '🔗';
+  }
+    
   }
   table td, table th {
     padding: 10px;
