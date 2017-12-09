@@ -1,32 +1,25 @@
-@import "compass/css3";
-
 table {
-  margin: 50px; 
-  td, th {
+    margin: 50px;
+  }
+  table td, table th {
     padding: 10px;
     text-align: left;
   }
-}
-
-.desktop {
-  tbody tr:nth-child(odd) {
+  .desktop tbody tr:nth-child(odd) {
     background: #eee;
   }
-}
-
-.generated_for_mobile tr.odd {
-  background: #eee;
-}
-
-.generated_for_mobile {
-  display: none;
-}
-
-@media only screen and (max-width: 768px) {
-  .generated_for_mobile {
-    display: table;
+  .generated_for_mobile tr.odd {
+    background: #eee;
   }
-  .desktop {
+  .generated_for_mobile {
     display: none;
   }
-}
+  @media only screen and (max-width: 768px) {
+    .generated_for_mobile {
+      display: table;
+    }
+    .desktop {
+      display: none;
+    }
+  }
+  
