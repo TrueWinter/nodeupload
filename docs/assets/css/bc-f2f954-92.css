@@ -36,7 +36,7 @@ table {
   }
 
   .totop {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAMAAADDpiTIAAABU1BMV…AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWv4CrOqxSDBafYQAAAAASUVORK5CYII=);
+    background-image: url('/assets/img/up-arrow.png');
     z-index: 2;
     background-repeat: no-repeat;
     background-size: 50px;
