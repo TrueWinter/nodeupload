@@ -449,8 +449,13 @@ $(document).ready(function () {
 
     <script>
       $(document).ready(function () {
+          if (window.pageYOffset > 100) {
+            $('.totop').fadeIn();
+          } else {
+            $('.totop').fadeOut();
+          }
         $(window).scroll(function(){
-          if ($(this).scrollTop() > 100) {
+          if (window.pageYOffset > 100) {
             $('.totop').fadeIn();
           } else {
             $('.totop').fadeOut();
