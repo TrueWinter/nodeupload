@@ -47,5 +47,6 @@ table {
     border-radius: 20px;
     text-align: center;
     vertical-align: middle;
+    display:none;
   }
   
