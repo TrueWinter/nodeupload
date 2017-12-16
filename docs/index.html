@@ -447,6 +447,14 @@ $(document).ready(function () {
       </section>
     </div>
 
+    <script>
+      $('.totop').on('click', function () {
+          $('html, body').animate({
+              scrollTop: $("#top").offset().top - 10
+          }, 500);
+      });
+    </script>
+
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
