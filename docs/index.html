@@ -448,6 +448,7 @@ $(document).ready(function () {
     </div>
 
     <script>
+      $(document).ready(function () {
         $(window).scroll(function(){
           if ($(this).scrollTop() > 100) {
             $('.totop').fadeIn();
@@ -460,6 +461,7 @@ $(document).ready(function () {
                 scrollTop: $("#top").offset().top - 10
             }, 500);
         });
+      });
     </script>
 
     <!-- FOOTER  -->
