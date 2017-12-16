@@ -449,6 +449,10 @@ $(document).ready(function () {
 
     <script>
       $(document).ready(function(){
+        
+        if ($(this).scrollTop() > 100) { // For if the user loads up the page in a position lower down
+            $('.totop').fadeIn();
+          }
 
         //Check to see if the window is top if not then display button
         $(window).scroll(function(){
