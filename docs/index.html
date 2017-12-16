@@ -448,10 +448,19 @@ $(document).ready(function () {
     </div>
 
     <script>
-      $('.totop').on('click', function () {
-          $('html, body').animate({
-              scrollTop: $("#top").offset().top - 10
-          }, 500);
+      $(document).ready(function(){
+        $(window).scroll(function(){
+          if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+          } else {
+            $('.scrollToTop').fadeOut();
+          }
+        });
+        $('.totop').on('click', function () {
+            $('html, body').animate({
+                scrollTop: $("#top").offset().top - 10
+            }, 500);
+        });
       });
     </script>
 
