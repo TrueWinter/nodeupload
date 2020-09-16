@@ -1,9 +1,7 @@
 # NodeUpload
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9053e5d3bcba40839645b3c193434329)](https://www.codacy.com/app/NdT3Development/nodeupload?utm_source=github.com&utm_medium=referral&utm_content=NdT3Development/nodeupload&utm_campaign=badger)
-[![Known Vulnerabilities](https://snyk.io/test/github/ndt3development/nodeupload/badge.svg)](https://snyk.io/test/github/ndt3development/nodeupload)
-
 ###### (Yeah, not the best name but I can't think of good names)
+
 Decided to start from scratch using a different dependency for uploading. Basics are working and I think it is ready for running in a production environment.
 
 **All screenshots use the tokens from the first GIF under the installing section. The screenshots may not be up to date so don't worry if the output in console looks slightly different.**
@@ -70,7 +68,7 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Does it have support for ShareX?
 
-  Yes it does! Please look at [the ShareX section of the docs](https://nodeupload.ndt3.ml/#sharex-configuration) for more details.
+  Yes it does! Please look at [the ShareX section of the docs](https://nodeupload.truewinter.dev/#sharex-configuration) for more details.
 
   > How are uploads done?
 
@@ -102,19 +100,19 @@ You will need to use a program that can send headers with a GET request. I prefe
 
   > Is there any way to change the responses (console output, web responses, etc.)?
 
-  Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. Please see [the docs](https://nodeupload.ndt3.ml) for more details.
+  Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. Please see [the docs](https://nodeupload.truewinter.dev) for more details.
 
   > Can I contribute to the development of NodeUpload by opening pull requests?
 
-  Yes, you can open a pull request but please use the format [here](https://github.com/NdT3Development/nodeupload/blob/master/PULL_REQUESTS.md)
+  Yes, you can open a pull request but please use the format [here](https://github.com/TrueWinter/nodeupload/blob/master/PULL_REQUESTS.md)
 
   > I found a bug, how do I report it?
 
-  To report a bug, open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/BUGS.md)
+  To report a bug, open an issue using the format [here](https://github.com/TrueWinter/nodeupload/blob/master/BUGS.md)
 
   > Can I request a feature?
 
-  Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/FEATURE_REQUESTS.md)
+  Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/TrueWinter/nodeupload/blob/master/FEATURE_REQUESTS.md)
 
   > Why was NodeUpload only 'production ready' in version 4.0.0?
 
@@ -166,7 +164,7 @@ You may come across some of these while using this.
 ## LICENSE
 MIT License
 
-Copyright (c) 2017 NdT3Development
+Copyright (c) 2017 TrueWinter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
