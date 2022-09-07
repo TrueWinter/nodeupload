@@ -1,5 +1,7 @@
 # NodeUpload
 
+**Deprecated in favour of [the S3 version](https://github.com/TrueWinter/nodeupload-s3).**
+
 ###### (Yeah, not the best name but I can't think of good names)
 
 Decided to start from scratch using a different dependency for uploading. Basics are working and I think it is ready for running in a production environment.
